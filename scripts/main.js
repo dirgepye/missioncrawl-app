@@ -30,9 +30,9 @@ var Crawls = React.createClass({
                     </div>
                 </div>
             </div>
-            )
+        );
     }
-})
+});
 
 /*
     Display Crawls
@@ -63,7 +63,11 @@ var DisplayCrawls = React.createClass({
 var CrawlCreate = React.createClass({
     render: function() {
         return (
-            <div className="create">
+            <div className="crawl">
+                <div className="header">
+                    <h1>Welcome</h1>
+                    <h3>Start your adventure here!</h3>
+                </div>
                 <div className="create__step">
                     <h1>Step One!</h1>
                     <Textarea/>
@@ -81,4 +85,4 @@ var CrawlCreate = React.createClass({
 //   </Router>
 // );
 
-ReactDOM.render(<DisplayCrawls />, document.querySelector('#main'));
+ReactDOM.render(<CrawlCreate />, document.querySelector('#main'));
