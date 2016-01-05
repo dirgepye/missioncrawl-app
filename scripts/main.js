@@ -1,25 +1,55 @@
-
-
 console.log("test");
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Textarea = require('react-textarea-autosize'); 
+var Textarea = require('react-textarea-autosize');
 
 
 // var Router = ReactRouter.Routers;
 // var Route = ReactRouter.Route;
 
-/*
-    Crawls
-    <Crawls />
-*/
-
 var Crawls = React.createClass({
     render : function() {
         return (
-            <div className="create">
-                <p>Crawls</p>
+            <div className="crawl">
+                <div className="crawl__step">
+                    
+                    <div className="crawl-display">
+                        <h2 className="crawl__title">Title</h2>
+                        <p className="crawl__description">Mauris finibus leo id cursus laoreet. Phasellus 
+                        bibendum eros mi, ut porttitor dui venenatis ut. 
+                        Mauris ut risus fermentum, finibus eros sit amet, 
+                        convallis quam</p>
+                        <div className="crawl-category">
+                            <ul>
+                                <li><a href="#">Fun</a></li>
+                                <li><a href="#">Adventure</a></li> 
+                                <li><a href="#">Food</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            )
+    }
+})
+
+/*
+    Display Crawls
+    <DisplayCrawls />
+*/
+
+var DisplayCrawls = React.createClass({
+    render: function() {
+        return (
+            <div className="container">
+                <div className="header">
+                    <h1>Adventures</h1>
+                    <h3>Select to start!</h3>
+                </div>
+                <Crawls />
+            <button></button>
+            <button></button>
             </div>
         );
     }
@@ -31,7 +61,7 @@ var Crawls = React.createClass({
 */
 
 var CrawlCreate = React.createClass({
-    render : function() {
+    render: function() {
         return (
             <div className="create">
                 <div className="create__step">
@@ -40,7 +70,7 @@ var CrawlCreate = React.createClass({
                     <a href="#">Add a step...</a>
                     <button>Add</button>
                 </div>
-            </div> 
+            </div>
         );
     }
 });
@@ -51,4 +81,4 @@ var CrawlCreate = React.createClass({
 //   </Router>
 // );
 
-ReactDOM.render(<Crawls />, document.querySelector('#main'));
+ReactDOM.render(<DisplayCrawls />, document.querySelector('#main'));
