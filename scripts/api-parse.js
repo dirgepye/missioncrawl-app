@@ -12,17 +12,60 @@ Parse.initialize(your_application_id,
 
 
 //Models
-var Missions = Parse.Object.extend("Missions");
+var Mission = Parse.Object.extend("Missions");
+var Step = Parse.Object.extend("Step");
 
 
-//Retrieving data
-var missions_list = new Parse.Query(Missions);
-missions_list.find({
-  success: function(results) {
-    console.log("Successfully retrieved " + results.length + " scores.");
-    }
- ,
-  error: function(error) {
-    console.log("Error: " + error.code + " " + error.message);
-  }
+//////////////////
+//API CALLS
+//////////////////
+
+
+//User signup
+
+
+//User signin
+
+
+//List of missions
+var mission_list = new Parse.Query(Mission);
+
+mission_list.find()
+.then(function(results) {
+  console.log("Successfully retrieved " + results.length + " scores.");
+})
+.then(function(hello) {
+  // Everything is done!
+}, function(error) {
+  console.log("Error: " + error.code + " " + error.message);
 });
+
+
+//A mission
+var mission = new Parse.Query(Mission);
+mission.get("mission-id")
+.then(function(mission) {
+    // The object was retrieved successfully.
+})
+.then(function(hello) {
+  // Everything is done!
+}, function(object, error) {
+    // The object was not retrieved successfully.
+    // error is a Parse.Error with an error code and message.
+});
+
+
+
+//Steps list of a mission
+
+
+
+
+
+//a step
+
+
+
+
+
+//Complete a step
