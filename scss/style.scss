@@ -1,14 +1,205 @@
-//test css
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+@import 'github-user';
+
+//UNIVERSAL CSS -----------------------------------
 
 * {
-    font-family: News Cycle, sans-serif;
+    font-family: 'PT Sans', sans-serif;
     font-weight: 400;
     box-sizing: border-box;
+    color: #0A2745;
+    margin: 0px;
+    padding: 0px;
+}
+
+.container {
+    
 }
 
 body {
     background-color: #646C75;
+    // width: 100%;
+    // background-position: 50% 50%;
+    
+    // background-image: 
+    // linear-gradient(
+    //     rgba(0,0,0,0.5),
+    //     rgba(0,0,0,0.5)
+    // ),
+    // url("http://www.quipmag.com/wp-content/uploads/2012/08/montreal.jpeg");
 }
+
+
+li {
+    display: inline-block;
+    padding-right: 5px;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #16718C;
+}
+
+.header {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+    margin-bottom: 80px;
+    text-align: center;
+    
+    border-bottom: solid 5px #16718C;
+
+    
+    h1 {
+        font-size: 8em;
+        color: #DED9DC;
+    }
+    
+    h3 {
+        font-size: 2em;
+        position: relative;
+        top: -10px;
+        color: #DED9DC;
+    }
+    
+}
+
+.buttons {
+    color: #DED9DC;
+    background-color: #16718C;
+    width: 75px;
+    height: 30px;
+    border: none;
+    border-radius: 2px;
+    margin: 0px 10px;
+    width: 20%;
+    margin: auto;
+    
+}
+
+.crawl--login {
+    
+    p {
+        font-size: 13px;
+        margin: 7px 0px 0px 0px;
+        padding: 7px 0px 0px 0px;
+        border-top: solid 1px #A4ADB0;
+    }
+    
+    h4 {
+        padding: 0px 0px 7px 0px;
+        margin: 0px 0px 7px 0px;
+        border-bottom: solid 1px #A4ADB0;
+    }
+}
+///////////////////
+//HOME 
+///////////////////
+
+.form {
+    width: 100%;
+    border-style: none;
+    font-size: 15px;
+    padding: 4px;
+    margin: 5px 0px;
+        
+}
+
+.form--submit {
+    background-color: #16718C;
+}
+
+
+
+
+////////////////////
+//DISPLAY ADVENTURES -------------------------------
+////////////////////
+
+
+
+
+.crawl {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    padding: 10px;
+    color: #646C75;
+    background-color: #DED9DC;
+    font-size: 22px;
+}
+
+.crawl--login {
+    width: 400px;
+}
+
+.crawl-display {
+    background-color: white;
+    padding: 10px 17px;
+    //margin: 0px 5px;
+    
+}
+
+.crawl__title {
+    font-family: 'PT Sans', sans-serif;
+    margin-bottom: 5px;
+    border-bottom: solid 1px #DED9DC;
+        
+        span {
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        
+    
+}
+
+
+.crawl__description {
+    border-bottom: solid 1px #DED9DC;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    
+
+}
+.crawl__step {                                                    
+    padding: 0px;
+    margin: 0px;
+    
+    h1 {
+        //font-family: Futura;
+    }
+    
+    textarea {
+        width: 100%;
+        border: solid 2px #A4ADB0;
+        font-size: 18px;
+        resize: none;
+        outline: none;
+    }
+}
+
+.crawl-category {
+    font-style: italic;
+}
+
+
+////////////////////
+// CREATE ADVENTURE -----------------------------
+///////////////////
+
 
 .create {
     width: 600px;
@@ -32,5 +223,7 @@ body {
         resize: none;
         outline: none;
     }
-    
-}
+} 
+
+
+
