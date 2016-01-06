@@ -10,11 +10,11 @@ var Home = React.createClass({
           <h3>Begin your adventure</h3>
         </div>
         <div>
-          <form className="crawl crawl--login">
+          <form id="login" className="crawl crawl--login">
             <h4>Log In</h4>
-            <input type="text" placeholder="user name" className="form form--login"/>
+            <input type="text" placeholder="user name" id="login-name" className="form form--login"/>
             <br />
-            <input type="text" placeholder="password" className="form form--login"/>
+            <input type="text" placeholder="password" id="login-password" className="form form--login"/>
             <br />
             <input type="Submit" value="log in" className="form form--submit" />
             <p>Don't have an account? <a href="#">Sign up now!</a></p>
@@ -25,6 +25,10 @@ var Home = React.createClass({
   }
 }
 );
+
+
+
+
 
 // var Home = React.createClass({
 //   render() {

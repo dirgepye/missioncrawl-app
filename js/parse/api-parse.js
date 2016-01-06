@@ -1,3 +1,6 @@
+import Parse from 'parse';
+import $ from 'jquery';
+
 var your_application_id = "NC8PhdseSu4eIz7fjSGX6Vxal3qqjfgnVEZjZ0gH";
 var your_javascript_key = "TeJ3i2uljGynZO7wnrb5paUmZnAZjv4YGtzwVrqt";
 

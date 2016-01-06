@@ -11,6 +11,8 @@ import Repos from './components/Repos';
 import DisplayCrawls from './components/DisplayCrawls';
 import SignUp from './components/SignUp';
 
+import parseAPI from './parse/api-parse';
+
 var routes = (
   <Router history={createHistory()}>
     <Route path="/" component={App}>

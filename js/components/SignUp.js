@@ -12,9 +12,11 @@ var SignUp = React.createClass({
         <div>
           <form className="crawl crawl--login">
             <h4>Sign Up</h4>
-            <input type="text" placeholder="user name" className="form form--login"/>
+            <input type="text" placeholder="user name" id="signup-name" className="form form--login"/>
             <br />
-            <input type="text" placeholder="password" className="form form--login"/>
+            <input type="text" placeholder="password" id="signup-password" className="form form--login"/>
+            <br />
+            <input type="text" placeholder="email" id="signup-email" className="form form--login"/>
             <br />
             <input type="Submit" value="sign up" className="form form--submit" />
             <p>Any questions? <a href="#">Check out our FAQ</a></p>
