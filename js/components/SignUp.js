@@ -1,23 +1,23 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-var Home = React.createClass({
+var SignUp = React.createClass({
   render() {
     return (
       <div>
         <div className="header">
-          <h1>Welcome</h1>
-          <h3>Begin your adventure</h3>
+          <h1>Sign Up</h1>
+          <h3>Fill out the info below!</h3>
         </div>
         <div>
           <form className="crawl crawl--login">
-            <h4>Log In</h4>
+            <h4>Sign Up</h4>
             <input type="text" placeholder="user name" className="form form--login"/>
             <br />
             <input type="text" placeholder="password" className="form form--login"/>
             <br />
-            <input type="Submit" value="log in" className="form form--submit" />
-            <p>Don't have an account? <a href="#">Sign up now!</a></p>
+            <input type="Submit" value="sign up" className="form form--submit" />
+            <p>Any questions? <a href="#">Check out our FAQ</a></p>
           </form>
         </div>
       </div>
@@ -39,4 +39,4 @@ var Home = React.createClass({
 //   }
 // });
 
-export default Home;
+export default SignUp;
