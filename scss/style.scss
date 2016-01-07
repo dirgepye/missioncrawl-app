@@ -1,3 +1,5 @@
+
+
 html {
   box-sizing: border-box;
 }
@@ -21,8 +23,10 @@ html {
 }
 
 .container {
-    
+    width: 600px;
+    margin: auto;
 }
+
 
 body {
     background-color: #646C75;
@@ -50,7 +54,7 @@ a {
 }
 
 .header {
-    width: 50%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 80px;
@@ -103,7 +107,7 @@ a {
     }
 }
 ///////////////////
-//HOME 
+//HOME    /////////
 ///////////////////
 
 .form {
@@ -198,7 +202,7 @@ a {
 
 ////////////////////
 // CREATE ADVENTURE -----------------------------
-///////////////////
+////////////////////
 
 
 .create {
@@ -211,17 +215,20 @@ a {
 }
 
 .create__step {                                                    
+    margin: 10px 0px;
     
     h1 {
         //font-family: Futura;
     }
     
-    textarea {
+    Textarea {
         width: 100%;
-        border: solid 2px #A4ADB0;
-        font-size: 18px;
+        height: 200px;
+        //border: solid 2px #A4ADB0;
+        //font-size: 18px;
         resize: none;
         outline: none;
+        
     }
 } 
 

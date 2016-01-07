@@ -18,7 +18,7 @@ var SignUp = React.createClass({
             <br />
             <input type="text" placeholder="email" id="signup-email" className="form form--login"/>
             <br />
-            <input type="Submit" value="sign up" className="form form--submit" />
+            <input type="Submit" className="form form--submit" />
             <p>Any questions? <a href="#">Check out our FAQ</a></p>
           </form>
         </div>
