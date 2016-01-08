@@ -1,5 +1,5 @@
-// var Parse = require('parse/node');
-var Parse = require('parse');
+var Parse = require('parse/node');
+// var Parse = require('parse');
 //import $ from 'jquery';
 
 var your_application_id = "NC8PhdseSu4eIz7fjSGX6Vxal3qqjfgnVEZjZ0gH";
@@ -25,28 +25,27 @@ var Step = Parse.Object.extend("Step");
 //User signUp
 
 function userSignup(username, password, email) {
+console.log('start');
 
   var user = new Parse.User();
   user.set("username", username);
   user.set("password", password);
-  user.set("email", email);
+  // user.set("email", email);
 
-  return user.signUp(null, {
-    success: function(user) {
-      return {
-        status: true,
-        response: user
-      }
-    },
-    error: function(user, error) {
-      // console.log("signup error",error);
-      return {
-        status: false,
-        response: error
-      }
-    }
-  });
+  return user.signUp(null);
 }
+
+
+// Signup test
+userSignup("jdoe", "deadman","email@dfds.com")
+.then(function(user) {
+    console.log("success");
+  //react
+  },
+  function(error) {
+    console.log(error);
+    
+});
 
 
 
@@ -57,48 +56,27 @@ function userLogIn(username, password) {
   //var username = Parse.User.logIn("username", username);
   //var password = Parse.User.logIn("password", password);
 
-  Parse.User.logIn(username, password, {
-    success: function(user) {
-      return {
-        status: true,
-        response: user
-      }
-      //console.log("log in successful!");
-    },
-    error: function(user, error) {
-      return {
-        status: false,
-        response: error
-      }
-      //console.log("Login error: " + error.message);
+  return Parse.User.logIn(username, password)
+  .then(function(user) {
+    console.log("log in successful!");
+    return {
+      status: true,
+      response: user
     }
+  },function(user, error) {
+    return {
+      status: false,
+      response: error
+    }
+    //console.log("Login error: " + error.message);
   });
 }
 
-userLogIn("jdoe", "deadman");
 
-// if (userLogIn("jdoe", "deadman").status) {
-//   console.log("user logged in");
-// }
-// else {
-//   console.log(error);
-// }.
-// then(function(user) {
-//   console.log("User logged in!");
-// }, function(error) {
-//   console.log("Error: " + error.code + " " + error.message);
-// });
-
-// if (userSignup("fffbf","sdgsg").status) {
-//   console.log("user signed up");
-// }
-// else {
-//   console.log("user already exist");
-// }
-// .then(function(user) {
-//   console.log("User signed up!");
-// }, function(error) {
-//   console.log("Error: " + error.code + " " + error.message);
+// Login test
+// userLogIn("jdoe", "deadman")
+// .then(function(response){
+//   console.log(response);
 // });
 
 
@@ -131,14 +109,18 @@ function assignUserToMission(missionId) {
 
 //ADD steps to Mission
 
-function assignStepsToMission(missionId){
+function assignStepsToMission(title, description, missionId){
   
   var step = Parse.object(Step);
+  step.set("title",title);
+  step.set("description",description);
+  step.set("title",title);
+  
+  var query = new Parse.Query("Mission");
   
   query.get(missionId).then(function(mission){
-    var relation = mission.relation("Step"); //or missionSteps?
-    relation.add()
-    
+    var relation = mission.relation("missionStep"); 
+    relation.add(step);
     step.save();
   })
 } 
