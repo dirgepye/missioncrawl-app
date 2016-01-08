@@ -25,7 +25,7 @@ var Step = Parse.Object.extend("Step");
 //User signUp
 
 function userSignup(username, password, email) {
-console.log('start');
+  console.log('start');
 
   var user = new Parse.User();
   user.set("username", username);
@@ -37,15 +37,15 @@ console.log('start');
 
 
 // Signup test
-userSignup("jdoe", "deadman","email@dfds.com")
-.then(function(user) {
-    console.log("success");
-  //react
-  },
-  function(error) {
-    console.log(error);
-    
-});
+userSignup("jdoe", "deadman", "email@dfds.com")
+  .then(function(user) {
+      console.log("success");
+      //react
+    },
+    function(error) {
+      console.log(error);
+
+    });
 
 
 
@@ -57,19 +57,19 @@ function userLogIn(username, password) {
   //var password = Parse.User.logIn("password", password);
 
   return Parse.User.logIn(username, password)
-  .then(function(user) {
-    console.log("log in successful!");
-    return {
-      status: true,
-      response: user
-    }
-  },function(user, error) {
-    return {
-      status: false,
-      response: error
-    }
-    //console.log("Login error: " + error.message);
-  });
+    .then(function(user) {
+      console.log("log in successful!");
+      return {
+        status: true,
+        response: user
+      }
+    }, function(user, error) {
+      return {
+        status: false,
+        response: error
+      }
+      //console.log("Login error: " + error.message);
+    });
 }
 
 
@@ -109,21 +109,21 @@ function assignUserToMission(missionId) {
 
 //ADD steps to Mission
 
-function assignStepsToMission(title, description, missionId){
-  
+function assignStepsToMission(title, description, missionId) {
+
   var step = Parse.object(Step);
-  step.set("title",title);
-  step.set("description",description);
-  step.set("title",title);
-  
+  step.set("title", title);
+  step.set("description", description);
+  //step.set("location", location);
+
   var query = new Parse.Query("Mission");
-  
-  query.get(missionId).then(function(mission){
-    var relation = mission.relation("missionStep"); 
+
+  query.get(missionId).then(function(mission) {
+    var relation = mission.relation("missionStep");
     relation.add(step);
     step.save();
   })
-} 
+}
 
 //List of missions for user
 function findAllMissions() {
@@ -138,41 +138,97 @@ function findAllMissions() {
 }
 
 //list of steps for user
-function findAllSteps(){
+function findAllSteps() {
   var query = new Parse.Query("Subscriptions");
   query
-  .equalTo('User', Parse.User.current())
-  .find()
-  .then(
-    function(steps){
-      console.log(steps);
-    })
+    .equalTo('User', Parse.User.current())
+    .find()
+    .then(
+      function(steps) {
+        console.log(steps);
+      })
 }
 
 
-
-
-
 // Create A Mission
+
+var Mission = Parse.Object.extend('Mission');
+var MissionStep = Parse.Object.extend('Step');
+
+var mission = new Mission();
+mission.set({
+  title: 'Dessert Crawl',
+  description: 'Eat all the desserts',
+  //location: {}
+});
+
+var missionStep = new MissionStep();
+missionStep.set({
+  title: 'Go to Christian Faure',
+  //location: {lat: 45, lng: -74},
+});
+
+var steps = mission.get('missionSteps') || [];
+
+steps.push(missionStep);
+
+mission.set('missionSteps', steps);
+missionStep.save();
+
+mission.save()
+
+
+
 
 var mission = new Parse.Query(Mission);
 
 
 mission.get("mission-id")
-   .then(function(mission) {
-     // The object was retrieved successfully.
-   })
-   .then(function(hello) {
-     // Everything is done!
-   }, function(object, error) {
-     // The object was not retrieved successfully.
-     // error is a Parse.Error with an error code and message.
-   });
+  .then(function(mission) {
+    // The object was retrieved successfully.
+  })
+  .then(function(hello) {
+    // Everything is done!
+  }, function(object, error) {
+    // The object was not retrieved successfully.
+    // error is a Parse.Error with an error code and message.
+  });
 
 
 
 //Steps list of a mission
 
+function listStepsOfMission(missionId) {
+
+  var query = new Parse.Query(Mission);
+  
+  // query.include("");
+
+  query.get(missionId)
+  .then(function(currentMission){
+    return currentMission.get("missionSteps");
+  })
+  .then(function(arrayOfSteps){
+    console.log(arrayOfSteps);
+  })
+  // .get("missionSteps")
+  // .then(function(steps){
+  //   console.log(steps);
+  // })
+  // .then(function(results) {
+
+  //     for (var i in results) {
+  //       var title = results[i].get("title");
+  //       var description = results[i].get("description");
+  //       var missionSteps = results[i].get("missionSteps");
+  //     }
+  //   }
+  // )
+}
+
+listStepsOfMission("vrRnpdOB2Y");
+
+//listStepsOfMission("bxreD6KsvJ");
 
 
 
