@@ -1,4 +1,5 @@
-var Parse = require('parse/node');
+// var Parse = require('parse/node');
+var Parse = require('parse');
 //import $ from 'jquery';
 
 var your_application_id = "NC8PhdseSu4eIz7fjSGX6Vxal3qqjfgnVEZjZ0gH";
@@ -76,17 +77,17 @@ function userLogIn(username, password) {
 
 userLogIn("jdoe", "deadman");
 
-if (userLogIn("jdoe", "deadman").status) {
-  console.log("user logged in");
-}
-else {
-  console.log(error);
-}.
-then(function(user) {
-  console.log("User logged in!");
-}, function(error) {
-  console.log("Error: " + error.code + " " + error.message);
-});
+// if (userLogIn("jdoe", "deadman").status) {
+//   console.log("user logged in");
+// }
+// else {
+//   console.log(error);
+// }.
+// then(function(user) {
+//   console.log("User logged in!");
+// }, function(error) {
+//   console.log("Error: " + error.code + " " + error.message);
+// });
 
 // if (userSignup("fffbf","sdgsg").status) {
 //   console.log("user signed up");
