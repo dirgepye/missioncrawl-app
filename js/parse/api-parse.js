@@ -1,5 +1,5 @@
-var Parse = require('parse/node');
-// var Parse = require('parse');
+//var Parse = require('parse/node');
+var Parse = require('parse');
 //import $ from 'jquery';
 
 var your_application_id = "NC8PhdseSu4eIz7fjSGX6Vxal3qqjfgnVEZjZ0gH";
@@ -37,15 +37,15 @@ console.log('start');
 
 
 // Signup test
-userSignup("jdoe", "deadman","email@dfds.com")
-.then(function(user) {
-    console.log("success");
-  //react
-  },
-  function(error) {
-    console.log(error);
+// userSignup("jdoe", "deadman","email@dfds.com")
+// .then(function(user) {
+//     console.log("success");
+//   //react
+//   },
+//   function(error) {
+//     console.log(error);
     
-});
+// });
 
 
 

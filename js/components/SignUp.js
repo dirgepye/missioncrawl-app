@@ -1,7 +1,50 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {Link,History} from 'react-router';
+ 
+import reactMixin from 'react-mixin';
+import Parse from 'parse';
+
+import api from '../parse/api-parse';
 
 var SignUp = React.createClass({
+  mixins : [History],
+  getInitialState : function() {
+    return {
+      error: ""
+    }
+  }, 
+  signUpHandler : function(event) {
+    event.preventDefault();
+    
+    var userName = this.refs.signUpUserName.value;
+    var userPassword = this.refs.signUpPassword.value;
+    var userEmail = this.refs.signUpEmail.value;
+    
+    var user = new Parse.User();
+    user.set("username", userName);
+    user.set("password", userPassword);
+    user.set("email", userEmail);
+    
+    var currentComponent = this;
+    
+    user.signUp(null)
+    .then(function(user) {
+    console.log("success")
+      // go to show adventures
+      
+     currentComponent.history.pushState(null, '/displaycrawls');  
+  //react
+  },
+  function(error) {
+    console.log(error);
+    // add error message on pop-up, leave it open
+    console.log(currentComponent);
+    currentComponent.setState({
+    error: error.message
+    });  
+  });
+    
+  }, 
   render() {
     return (
       <div>
@@ -10,13 +53,14 @@ var SignUp = React.createClass({
           <h3>Fill out the info below!</h3>
         </div>
         <div>
-          <form className="crawl crawl--login">
+          <form className="crawl crawl--login" onSubmit={this.signUpHandler}>
             <h4>Sign Up</h4>
-            <input type="text" placeholder="user name" id="signup-name" className="form form--login"/>
+            {this.state.error}
+            <input type="text" ref="signUpUserName" placeholder="user name" id="signup-name" className="form form--login"/>
             <br />
-            <input type="text" placeholder="password" id="signup-password" className="form form--login"/>
+            <input type="text" ref="signUpPassword" placeholder="password" id="signup-password" className="form form--login"/>
             <br />
-            <input type="text" placeholder="email" id="signup-email" className="form form--login"/>
+            <input type="text" ref="signUpEmail" placeholder="email" id="signup-email" className="form form--login"/>
             <br />
             <input type="Submit" className="form form--submit" />
             <p>Any questions? <a href="#">Check out our FAQ</a></p>

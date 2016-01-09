@@ -23,7 +23,7 @@ html {
 }
 
 .container {
-    width: 600px;
+    width: 700px;
     margin: auto;
 }
 
@@ -57,8 +57,8 @@ a {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 80px;
-    margin-bottom: 80px;
+    padding-top: 80px;
+    padding-bottom: 80px;
     text-align: center;
     
     border-bottom: solid 5px #16718C;
@@ -106,9 +106,9 @@ a {
         border-bottom: solid 1px #A4ADB0;
     }
 }
-///////////////////
-//HOME    /////////
-///////////////////
+/////////////////////////////////////
+//HOME    LOGIN     SIGN UP /////////
+/////////////////////////////////////
 
 .form {
     width: 100%;
@@ -123,6 +123,19 @@ a {
     background-color: #16718C;
 }
 
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.25);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 
 
 
@@ -142,7 +155,7 @@ a {
     padding: 10px;
     color: #646C75;
     background-color: #DED9DC;
-    font-size: 22px;
+    font-size: 1em;
 }
 
 .crawl--login {
@@ -152,6 +165,7 @@ a {
 .crawl-display {
     background-color: white;
     padding: 10px 17px;
+    
     //margin: 0px 5px;
     
 }
@@ -178,9 +192,11 @@ a {
     
 
 }
-.crawl__step {                                                    
-    padding: 0px;
-    margin: 0px;
+.crawl__details {                                                    
+    padding: 0px 0px 10px 0px;
+    margin: 0px 0px 10px 0px;
+    
+    border-bottom: solid 1px black;
     
     h1 {
         //font-family: Futura;
@@ -192,6 +208,37 @@ a {
         font-size: 18px;
         resize: none;
         outline: none;
+    }
+}
+
+.crawl__steps {
+    width: 60%;
+    
+    ol li {
+        margin: 5px 0px;
+        padding: 10px 5px;
+        display: block;
+        background-color: white;
+    }
+    
+    ol li:hover {
+        background-color: #16718C;
+        color: #DED9DC;
+    }
+    
+    .hidden {
+        
+
+    }
+    
+}
+
+.crawl__map {
+    float: right;
+    width: 38%;
+    
+    .crawl__map-style {
+
     }
 }
 
@@ -232,5 +279,10 @@ a {
     }
 } 
 
+
+.error {
+    color: red;
+    font-weight: bold;
+}
 
 

@@ -2,39 +2,53 @@ import React from 'react';
 import {Link,History} from 'react-router';
 // import {History} from 'history';
 import reactMixin from 'react-mixin';
+import Parse from 'parse';
+
 import api from '../parse/api-parse';
+
 
 var Login = React.createClass({
   mixins : [History],
-  goToProfile(event) {
-    event.preventDefault();
-
-    var profileUserName = this.refs.profileUserName.value;
-    var profilePass = this.refs.profilePass.value;
-
-    // if (api.userLogin(profileUserName,profilePass)) === 'ok'{
-    // login OK
-    // this.history.pushState(null, '/profile');
-    //};
-    // else {
-      
-    // }
-    
-    this.history.pushState(null, '/home');
+  getInitialState : function() {
+    return {
+      error: ""
+    }
   },
+  loginHandler : function(event) {
+    event.preventDefault();
+   
+    var profileUserName = this.refs.loginUserName.value;
+    var profilePass = this.refs.loginPass.value;
+    
+    var currentComponent = this;
+    
+    Parse.User.logIn(profileUserName, profilePass)
+    .then(function(user) {
+        console.log("log in successful!");
+        currentComponent.history.pushState(null, '/displaycrawls');
+    },
+    
+    function(error) {
+        console.log(error);
+        currentComponent.setState({
+          error: error.message
+        });
+    });
+  },  
   render() {
     return (
-      <div>
+      <div className="container">
         <div className="header">
           <h1>Welcome</h1>
           <h3>Begin your adventure</h3>
         </div>
         <div>
-          <form id="login" className="crawl crawl--login" onSubmit={this.goToProfile}>
+          <form id="login" className="crawl crawl--login" onSubmit={this.loginHandler}>
             <h4>Log In</h4>
-            <input type="text" ref="profileUserName" placeholder="user name" id="login-name" className="form form--login"/>
+            <span className="error">{this.state.error}</span>
+            <input type="text" ref="loginUserName" placeholder="user name" id="login-name" className="form form--login"/>
             <br />
-            <input type="text" ref="profilePass" placeholder="password" id="login-password" className="form form--login"/>
+            <input type="text" ref="loginPass" placeholder="password" id="login-password" className="form form--login"/>
             <br />
             <input type="Submit" className="form form--submit" />
             <p>Don't have an account? <a href="#">Sign up now!</a></p>
@@ -43,8 +57,7 @@ var Login = React.createClass({
       </div>
     );
   }
-}
-);
+});
 
 
 
@@ -85,4 +98,4 @@ var Navigation = React.createClass ({
 // });
 
 
-export default Navigation;
+export default Login;
