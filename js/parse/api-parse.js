@@ -14,7 +14,7 @@ Parse.initialize(your_application_id,
 //Models
 var Mission = Parse.Object.extend("Mission");
 var Step = Parse.Object.extend("Step");
-
+var Subscriptions = Parse.Object.extend("Subscriptions");
 
 //////////////////
 //API CALLS
@@ -127,13 +127,15 @@ function assignStepsToMission(title, description, missionId) {
 
 //List of missions for user
 function findAllMissions() {
-  var query = new Parse.Query("Subscriptions");
+  var query = new Parse.Query(Subscriptions);
   query
     .equalTo('User', Parse.User.current())
     .find()
     .then(
-      function(missions) {
-        console.log(missions);
+      function(userSubscriptions) {
+        return userSubscriptions.map(function(sub){
+          sub.get("Mission");
+        });
       });
 }
 
