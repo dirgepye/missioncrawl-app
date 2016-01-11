@@ -152,7 +152,11 @@ function findAllSteps() {
 }
 
 
+
+
 // Create A Mission
+
+function createMission(){
 
 var Mission = Parse.Object.extend('Mission');
 var MissionStep = Parse.Object.extend('Step');
@@ -163,6 +167,8 @@ mission.set({
   description: 'Eat all the desserts',
   //location: {}
 });
+}
+
 
 var missionStep = new MissionStep();
 missionStep.set({
@@ -247,3 +253,27 @@ listStepsOfMission("vrRnpdOB2Y");
 module.exports = {
   userSignup: userSignup
 }
+
+module.exports = {
+  userLogIn: userLogIn
+}
+
+// module.exports = {
+//   assignUserToMission: assignUserToMission
+// }
+
+// module.exports = {
+//   assignStepsToMission: assignStepsToMission
+// }
+
+// module.exports = {
+//   findAllMissions: findAllMissions
+// }
+
+// module.exports = {
+//   findAllSteps: findAllSteps
+// }
+
+// module.exports = {
+//   listStepsOfMission: listStepsOfMission
+// }
