@@ -22,8 +22,12 @@ var Subscriptions = Parse.Object.extend("Subscriptions");
 module.exports = {
   getUserMissions:getUserMissions,
   subscribeToMission:subscribeToMission,
-  listStepsOfMission,listStepsOfMission
-}
+  listStepsOfMission:listStepsOfMission,
+  assignStepsToMission: assignStepsToMission,
+  userCurrentStep:userCurrentStep,
+  stepsProgress:stepsProgress,
+  getMission:getMission
+};
 
 
 //List of missions the current user is subscribed to: return an array of mission Parse Object
@@ -36,7 +40,7 @@ function getUserMissions(currentUser) { // formerly named findAllMissions
   var query = new Parse.Query(Subscriptions);
   
   return query
-    .equalTo('User', currentUser)
+    .equalTo('User', currentUser).include("Mission")
     .find()
     .then(function(userSubscriptions) {
       return userSubscriptions.map(function(sub){
@@ -57,7 +61,7 @@ function listStepsOfMission(missionId) {
   })
   .then(function(arrayOfSteps){
     return arrayOfSteps;
-  })
+  });
 }
 
 
@@ -74,78 +78,73 @@ function subscribeToMission(missionId) { // formerly named assignUserToMission
     relation.add(user);
 
     mission.save();
-  })
+  });
 }
 
 
 //ADD steps to Mission
-function assignStepsToMission(title, description, missionId) {
+function assignStepsToMission(title, description, location, missionId) {
 
-  var step = Parse.object(Step);
-  step.set("title", title);
-  step.set("description", description);
-  //step.set("location", location);
+  var newStep = new Step();
+  newStep.set("title", title);
+  newStep.set("description", description);
+  // newStep.set("location", location);
 
-  var query = new Parse.Query("Mission");
+  var query = new Parse.Query(Mission);
 
-  query.get(missionId).then(function(mission) {
-    var relation = mission.relation("missionStep");
-    relation.add(step);
-    step.save();
-  })
+  return newStep.save().then(function(savedStep){
+
+    return query.get(missionId).then(function(mission) {
+      
+      var stepRelation = mission.get("steps");
+      
+      stepRelation.add(savedStep);
+      
+      return mission.save();
+      
+    });
+  });
+}
+
+//User's current step
+
+function userCurrentStep(mission,currentUser) {
+  var query = new Parse.Query(Subscriptions);
+  
+  var currentUser = currentUser || Parse.User.current();
+  
+  return query
+  .equalTo('user', currentUser)
+  .equalTo('mission', mission)
+  .include("step")
+  .find()
+  .then(function(subscriptions){
+    return subscriptions[0].get('step');
+  });
+}
+
+function stepsProgress(key){
+  var query = new Parse.Query("Subscriptions");
+  var currentUser = currentUser || Parse.User.current();
+  
+  query.equalTo('User', currentUser).find().then(function(currentStep){
+    return currentStep.get("currentStep");
+  }).then(function(step){
+    if (key){
+      return step + 1;  // return the NEXT step
+    }
+    else {
+      return step; // return the CURRENT step
+    }
+  }
+  );
 }
 
 
-
-
-
-// Create A Mission
-
-// var Mission = Parse.Object.extend('Mission');
-// var MissionStep = Parse.Object.extend('Step');
-
-// var mission = new Mission();
-// mission.set({
-//   title: 'Dessert Crawl',
-//   description: 'Eat all the desserts',
-//   //location: {}
-// });
-
-// var missionStep = new MissionStep();
-// missionStep.set({
-//   title: 'Go to Christian Faure',
-//   //location: {lat: 45, lng: -74},
-// });
-
-// var steps = mission.get('missionSteps') || [];
-
-// steps.push(missionStep);
-
-// mission.set('missionSteps', steps);
-// missionStep.save();
-
-// mission.save()
-
-
-
-
-// var mission = new Parse.Query(Mission);
-
-
-// mission.get("mission-id")
-//   .then(function(mission) {
-//     // The object was retrieved successfully.
-//   })
-//   .then(function(hello) {
-//     // Everything is done!
-//   }, function(object, error) {
-//     // The object was not retrieved successfully.
-//     // error is a Parse.Error with an error code and message.
-//   });
-
-
-
-
+function getMission(id){
+    var query = new Parse.Query(Mission);
+    return query.get(id);
+}
 
 
 //listStepsOfMission("bxreD6KsvJ");
