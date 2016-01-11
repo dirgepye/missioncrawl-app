@@ -40,11 +40,12 @@ function getUserMissions(currentUser) { // formerly named findAllMissions
   var query = new Parse.Query(Subscriptions);
   
   return query
-    .equalTo('User', currentUser).include("Mission")
+    .equalTo('user', currentUser)
+    .include("mission") 
     .find()
     .then(function(userSubscriptions) {
       return userSubscriptions.map(function(sub){
-        return sub.get("Mission");
+        return sub.get("mission");
       });
     });
 }
@@ -116,7 +117,7 @@ function userCurrentStep(mission,currentUser) {
   return query
   .equalTo('user', currentUser)
   .equalTo('mission', mission)
-  .include("step")
+  .include('step')
   .find()
   .then(function(subscriptions){
     return subscriptions[0].get('step');
@@ -124,10 +125,13 @@ function userCurrentStep(mission,currentUser) {
 }
 
 function stepsProgress(key){
-  var query = new Parse.Query("Subscriptions");
+  var query = new Parse.Query(Subscriptions);
   var currentUser = currentUser || Parse.User.current();
   
-  query.equalTo('User', currentUser).find().then(function(currentStep){
+  query
+  .equalTo('user', currentUser)
+  .find()
+  .then(function(currentStep){
     return currentStep.get("currentStep");
   }).then(function(step){
     if (key){
