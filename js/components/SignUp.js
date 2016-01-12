@@ -2,9 +2,7 @@ import React from 'react';
 import {Link,History} from 'react-router';
  
 import reactMixin from 'react-mixin';
-import Parse from 'parse';
 
-import api from '../parse/api-parse';
 
 var SignUp = React.createClass({
   mixins : [History],
@@ -53,7 +51,7 @@ var SignUp = React.createClass({
           <h3>Fill out the info below!</h3>
         </div>
         <div>
-          <form className="crawl crawl--login" onSubmit={this.signUpHandler}>
+          <form className="adventure adventure--login" onSubmit={this.signUpHandler}>
             <h4>Sign Up</h4>
             {this.state.error}
             <input type="text" ref="signUpUserName" placeholder="user name" id="signup-name" className="form form--login"/>

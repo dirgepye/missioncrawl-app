@@ -5,7 +5,7 @@ import Adventure from './Adventure';
 var AdventureDetails = React.createClass ({
    render() {
        return (
-            <div className="container">
+            <div>
                 <div className="crawl">
                     <div className="crawl__details">
                     
@@ -19,15 +19,15 @@ var AdventureDetails = React.createClass ({
                             </div>
                         </div>
                     </div>
-                    <div className="crawl__steps">
+                    
+                    <div className="adventure__steps">
                         <ol>
                             <li className="complete">fafdssdfa</li>
                             <li className="current">dsafsdfasdfds</li>
                             <li className="hidden">fdsafdsfadsfsd</li>
                             <li className="hidden">fdsafdsfsa</li>
-                        </ol>    
-                    </div>
-                    <div className="crawl__map">
+                        </ol>
+                        <img src="http://placecorgi.com/450/450" />
                         
                     </div>
                 </div>

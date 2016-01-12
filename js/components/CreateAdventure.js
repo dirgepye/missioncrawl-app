@@ -2,14 +2,10 @@ import React from 'react';
 import {Link} from 'react-router';
 import Textarea from 'react-textarea-autosize';
 
-var CreateCrawl = React.createClass({
+var CreateAdventure = React.createClass({
     render() {
         return (
             <div className="container">
-                <div className="header">
-                    <h1>Create an Adventure!</h1>
-                    <h3>Fill out the information below!</h3>
-                </div>
                 <form>
                     <div className="create create__basics">
                         Title
@@ -23,18 +19,21 @@ var CreateCrawl = React.createClass({
                         Categories
                         <br />
                         <input type="test" placeholder="Fun, Educational, Food..." className="form"/>
+                        <span>Add category</span>
                     </div>
                     <div className="create create__step">
+                        <h4>Step</h4>
                         <Textarea placeholder="Instructions" className="form"/>
                         <br />
                         <Textarea placeholder="Key" className="form"/>
                         <br />
+                        <button className="buttons">Add Step</button>
                     </div>
-                    <button className="buttons">Add Step</button>
+                    
                 </form>  
             </div>
         );
     }
 });
 
-export default CreateCrawl;
+export default CreateAdventure;

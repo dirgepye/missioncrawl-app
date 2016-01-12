@@ -8,7 +8,7 @@ html {
   box-sizing: inherit;
 }
 
-
+@import 'variables';
 @import 'github-user';
 
 //UNIVERSAL CSS -----------------------------------
@@ -23,10 +23,9 @@ html {
 }
 
 .container {
-    width: 700px;
+    width: 900px;
     margin: auto;
 }
-
 
 body {
     background-color: #646C75;
@@ -54,11 +53,12 @@ a {
 }
 
 .header {
-    width: 100%;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 80px;
-    padding-bottom: 80px;
+    margin-bottom: 20px;
+    padding-top: 60px;
+    padding-bottom: 60px;
     text-align: center;
     
     border-bottom: solid 5px #16718C;
@@ -91,21 +91,10 @@ a {
     
 }
 
-.crawl--login {
+
     
-    p {
-        font-size: 13px;
-        margin: 7px 0px 0px 0px;
-        padding: 7px 0px 0px 0px;
-        border-top: solid 1px #A4ADB0;
-    }
     
-    h4 {
-        padding: 0px 0px 7px 0px;
-        margin: 0px 0px 7px 0px;
-        border-bottom: solid 1px #A4ADB0;
-    }
-}
+
 /////////////////////////////////////
 //HOME    LOGIN     SIGN UP /////////
 /////////////////////////////////////
@@ -123,33 +112,7 @@ a {
     background-color: #16718C;
 }
 
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    background-color: rgba(0, 0, 0, 0.25);
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-
-
-////////////////////
-//DISPLAY ADVENTURES -------------------------------
-////////////////////
-
-
-
-
-.crawl {
-    width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+.adventure {
     margin-bottom: 20px;
     border-radius: 2px;
     padding: 10px;
@@ -158,9 +121,30 @@ a {
     font-size: 1em;
 }
 
-.crawl--login {
+.adventure--login {
     width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    p {
+        font-size: 13px;
+        margin: 7px 0px 0px 0px;
+        padding: 7px 0px 0px 0px;
+        border-top: solid 1px #A4ADB0;
+    }
+    
+    h4 {
+        padding: 0px 0px 7px 0px;
+        margin: 0px 0px 7px 0px;
+        border-bottom: solid 1px #A4ADB0;
+    }
 }
+
+////////////////////
+//DISPLAY ADVENTURES -------------------------------
+////////////////////
+
+
 
 .crawl-display {
     background-color: white;
@@ -171,7 +155,6 @@ a {
 }
 
 .crawl__title {
-    font-family: 'PT Sans', sans-serif;
     margin-bottom: 5px;
     border-bottom: solid 1px #DED9DC;
         
@@ -179,9 +162,6 @@ a {
             font-style: italic;
             font-size: 14px;
         }
-
-        
-    
 }
 
 
@@ -196,7 +176,7 @@ a {
     padding: 0px 0px 10px 0px;
     margin: 0px 0px 10px 0px;
     
-    border-bottom: solid 1px black;
+    border-bottom: solid 1px $med-gray;
     
     h1 {
         //font-family: Futura;
@@ -211,8 +191,15 @@ a {
     }
 }
 
-.crawl__steps {
-    width: 60%;
+.adventure__steps {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: stretch;
+    
+    ol {
+        width: 100%;
+        padding-right: 10px;
+    }
     
     ol li {
         margin: 5px 0px;
@@ -226,9 +213,8 @@ a {
         color: #DED9DC;
     }
     
-    .hidden {
-        
-
+    img {
+    
     }
     
 }
@@ -254,7 +240,8 @@ a {
 
 .create {
     width: 600px;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #DED9DC;
     border-radius: 2px;
     padding: 5px;
@@ -262,7 +249,10 @@ a {
 }
 
 .create__step {                                                    
-    margin: 10px 0px;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
     
     h1 {
         //font-family: Futura;
@@ -284,5 +274,42 @@ a {
     color: red;
     font-weight: bold;
 }
+
+.navbar {
+    float: left;
+    width: 300px;
+    top: 200px;
+    
+    a {
+        color: $navy;
+        font-size: 1.4em;
+        padding: 10px 15px;
+        display: block;
+        
+    }
+    
+    li {
+        display: block;
+        background-color: $med-gray;
+        margin: 10px 5px 10px 0px;
+        
+        
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
