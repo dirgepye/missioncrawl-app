@@ -1,8 +1,8 @@
-var package = "parse";
+var parseLib = "parse";
 
 module.exports = {
-    package:package,
+    parseLib:parseLib,
     setPackage: function(package) {
-        this.package = package;
+        this.parseLib = package;
     }
 }
