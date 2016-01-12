@@ -1,8 +1,10 @@
-var package = "parse";
+var lib = require('parse');
 
 module.exports = {
-    package:package,
-    setPackage: function(package) {
-        this.package = package;
+    getLib: function(){
+        return lib;
+    },
+    setLibForNodeTesting: function(){
+        lib = require('parse/node');
     }
 }

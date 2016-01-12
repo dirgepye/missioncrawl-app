@@ -1,5 +1,5 @@
 var Parse = require("parse/node");
-require("./package").setPackage("parse/node");
+require('./package').setLibForNodeTesting();
 var api = require('./api');
 
 
@@ -34,10 +34,21 @@ query.get("ZWhpXimc5a")
     // });
     
 
-    api.listStepsOfMission("DXEfdX7Job")
-    .then(function(result){
+    // api.listStepsOfMission("DXEfdX7Job")
+    // .then(function(result){
+    //     console.log(result);
+    // });
+    
+    //     api.getFirstStep("DXEfdX7Job")
+    // .then(function(result){
+    //     console.log(result);
+    // });
+    
+    api.getMissionList().then(function(result){
         console.log(result);
     });
+    
+    
     
     // api.userCurrentStep("ZWhpXimc5a").then(function(result){
     //     console.log(result);
