@@ -29,7 +29,8 @@ module.exports = {
   stepsProgress: stepsProgress,
   getMission: getMission,
   userSignup: u.userSignup,
-  userLogIn: u.userLogIn
+  userLogIn: u.userLogIn,
+  getFirstStep: getFirstStep
 };
 
 
@@ -60,10 +61,11 @@ function listStepsOfMission(missionId) {
   var query = new Parse.Query(Mission);
 
   return query
-    .include('steps')
+    //.include('steps')
     .get(missionId)
     .then(function(currentMission) {
-      return currentMission.get("steps");
+
+      return currentMission.relation("steps").query().find();
     })
     .then(function(arrayOfSteps) {
       return arrayOfSteps;
@@ -116,9 +118,24 @@ function subscribeToMission(missionId) { // formerly named assignUserToMission
   });
 }
 
-function getFirstStep(missionObj) {
+// Get First Step of a Mission
 
+function getFirstStep(missionId) {
+
+  var query = new Parse.Query(Mission);
+
+  return query
+    .get(missionId)
+    .then(function(currentMission) {
+
+      return currentMission.relation("steps").query().equalTo("stepOrder", 1).find();
+    })
+    .then(function(arrayOfSteps) {
+      return arrayOfSteps;
+
+    });
 }
+
 
 function completeStep(stepObj, missionObj, user) {
 
