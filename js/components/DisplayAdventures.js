@@ -19,16 +19,16 @@ var DisplayButton = React.createClass({
 var Adventures = React.createClass({
     render() {
         return (
-            <div className="crawl">
-                <div className="crawl__step">
+            <div className="adventure">
+                <div className="adventure__step">
                     
-                    <div className="crawl-display">
-                        <h2 className="crawl__title">Title</h2>
-                        <p className="crawl__description">Mauris finibus leo id cursus laoreet. Phasellus 
+                    <div className="adventure-display">
+                        <h2 className="adventure__title">Title</h2>
+                        <p className="adventure__description">Mauris finibus leo id cursus laoreet. Phasellus 
                         bibendum eros mi, ut porttitor dui venenatis ut. 
                         Mauris ut risus fermentum, finibus eros sit amet, 
                         convallis quam</p>
-                        <div className="crawl-category">
+                        <div className="adventure-category">
                             <ul>
                                 <li><a href="#">Fun</a></li>
                                 <li><a href="#">Adventure</a></li> 
