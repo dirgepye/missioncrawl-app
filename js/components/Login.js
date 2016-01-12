@@ -2,9 +2,8 @@ import React from 'react';
 import {Link,History} from 'react-router';
 // import {History} from 'history';
 import reactMixin from 'react-mixin';
-import Parse from 'parse';
+//import Parse from 'parse';
 
-import api from '../parse/api-parse';
 
 
 var Login = React.createClass({
@@ -37,13 +36,13 @@ var Login = React.createClass({
   },  
   render() {
     return (
-      <div className="container">
+      <div>
         <div className="header">
           <h1>Welcome</h1>
           <h3>Begin your adventure</h3>
         </div>
         <div>
-          <form id="login" className="crawl crawl--login" onSubmit={this.loginHandler}>
+          <form id="login" className="adventure adventure--login" onSubmit={this.loginHandler}>
             <h4>Log In</h4>
             <span className="error">{this.state.error}</span>
             <input type="text" ref="loginUserName" placeholder="user name" id="login-name" className="form form--login"/>
@@ -59,7 +58,7 @@ var Login = React.createClass({
   }
 });
 
-
+// ?????? wtf?
 
 var Navigation = React.createClass ({
   renderLogIn(event) {

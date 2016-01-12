@@ -1,9 +1,7 @@
 import React from 'react';
 import samples from '../adventures';
 import Adventure from './Adventure';
-import Parse from 'parse';
 
-import api from '../parse/api-parse';
 
 
 var AdventuresList = React.createClass({

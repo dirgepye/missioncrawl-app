@@ -7,32 +7,31 @@ import App from './components/App';
 import NotFound from './components/NotFound';
 import Adventures from './components/Adventures';
 import Login from './components/Login';
-import Followers from './components/Followers';
-import Repos from './components/Repos';
-import DisplayCrawls from './components/DisplayCrawls';
+import DisplayAdventures from './components/DisplayAdventures';
 import SignUp from './components/SignUp';
-import CreateCrawl from './components/CreateCrawl';
+import CreateAdventure from './components/CreateAdventure';
 import Adventure from './components/Adventure';
 import AdventureDetails from './components/AdventureDetails';
-import HomeBase from './components/HomeBase';
+import Navbar from './components/Navbar';
+import FindAdventure from './components/FindAdventure';
 
 
-import parseAPI from './parse/api-parse';
+
 
 var routes = (
   <Router history={createHistory()}>
+    <Route path="login" component={Login}/>
+    <Route path="signup" component={SignUp}/>
     <Route path="/" component={App}>
       <IndexRoute component={Login}/>
       <Route path="user-adventures" component={Adventures}/>
-      <Route path="followers" component={Followers}/>
-      <Route path="repos" component={Repos}/>
-      <Route path="displaycrawls" component={DisplayCrawls}/>
-      <Route path="signup" component={SignUp}/>
-      <Route path="createcrawl" component={CreateCrawl}/>
-      <Route path="login" component={Login}/>
+      <Route path="display-adventures" component={DisplayAdventures}/>
+      
+      <Route path="create-adventure" component={CreateAdventure}/>
       <Route path="adventure" component={Adventure}/>
       <Route path="adventure-details" component={AdventureDetails}/>
-      <Route path="homebase" component={HomeBase}/>
+      <Route path="dashboard" component={Navbar}/>
+      <Route path="findadventure" component={FindAdventure} />
       <Route path="*" component={NotFound}/>
     </Route>
   </Router>

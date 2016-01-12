@@ -16,7 +16,7 @@ var DisplayButton = React.createClass({
 
 
 
-var Crawls = React.createClass({
+var Adventures = React.createClass({
     render() {
         return (
             <div className="crawl">
@@ -67,7 +67,7 @@ var DisplayAdventures = React.createClass({
                     <h1>Adventures</h1>
                     <h3>Select to start!</h3>
                 </div>
-                <Crawls />
+                <Adventures />
             <button>Next</button>
             <button>Previous</button>
             </div>
@@ -76,4 +76,4 @@ var DisplayAdventures = React.createClass({
     
 });
 
-export default DisplayButton;
+export default DisplayAdventures;
