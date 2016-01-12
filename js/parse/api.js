@@ -45,7 +45,7 @@ function getUserMissions(currentUser) { // formerly named findAllMissions
     .find()
     .then(function(userSubscriptions) {
       return userSubscriptions.map(function(sub){
-        return sub.get("mission");
+        return sub.get("mission"); //returns array of mission objects .get("title") gives titles of missions
       });
     });
 }
@@ -58,7 +58,7 @@ function listStepsOfMission(missionId) {
   
   return query.get(missionId)
   .then(function(currentMission){
-    return currentMission.get("missionSteps");
+    return currentMission.get("steps");
   })
   .then(function(arrayOfSteps){
     return arrayOfSteps;
@@ -66,25 +66,8 @@ function listStepsOfMission(missionId) {
 }
 
 
-//Subscribe to a Mission
-function subscribeToMission(missionId) { // formerly named assignUserToMission
-
-  var user = Parse.User.current(); //user can assign other users to missions so not necessarily current user
-
-  var query = new Parse.Query("Mission");
-
-  query.get(missionId).then(function(mission) {
-    var relation = mission.relation("Subscriptions");
-
-    relation.add(user);
-
-    mission.save();
-  });
-}
-
-
 //ADD steps to Mission
-function assignStepsToMission(title, description, location, missionId) {
+function assignStepsToMission(title, description, location, missionObj) {
 
   var newStep = new Step();
   newStep.set("title", title);
@@ -95,7 +78,7 @@ function assignStepsToMission(title, description, location, missionId) {
 
   return newStep.save().then(function(savedStep){
 
-    return query.get(missionId).then(function(mission) {
+    return query.get(missionObj).then(function(mission) {
       
       var stepRelation = mission.get("steps");
       
@@ -105,6 +88,45 @@ function assignStepsToMission(title, description, location, missionId) {
       
     });
   });
+}
+
+
+
+//Subscribe to a Mission
+function subscribeToMission(missionId) { // formerly named assignUserToMission
+
+  var user = Parse.User.current(); //user can assign other users to missions so not necessarily current user
+
+  var query = new Parse.Query("Mission");
+
+  query.get(missionId).then(function(mission) {
+    
+    var subscription = new Subscriptions();
+    subscription.set("Mission", mission);
+    subscription.set("User", user);
+    subscription.set("Step", getFirstStep(mission));
+    
+    subscription.save();
+
+  });
+}
+
+function getFirstStep(missionObj){
+  
+}
+
+function completeStep(stepObj, missionObj, user) {
+  
+  // set complete? to true on the subscriptions
+  
+  
+  // add a new subscriptions for the next step
+  getNextStep(stepObj)
+  
+}
+
+function getNextStep(missionObj, currentStep){
+  
 }
 
 //User's current step
@@ -124,12 +146,14 @@ function userCurrentStep(mission,currentUser) {
   });
 }
 
-function stepsProgress(key){
+
+function stepsProgress(key){ //do we need key???
   var query = new Parse.Query(Subscriptions);
   var currentUser = currentUser || Parse.User.current();
   
   query
   .equalTo('user', currentUser)
+  .include('step') //?? do we include step here??
   .find()
   .then(function(currentStep){
     return currentStep.get("currentStep");
