@@ -3,6 +3,7 @@ import {Link,History} from 'react-router';
  
 import reactMixin from 'react-mixin';
 
+import api from '../parse/api';
 
 var SignUp = React.createClass({
   mixins : [History],
@@ -18,14 +19,9 @@ var SignUp = React.createClass({
     var userPassword = this.refs.signUpPassword.value;
     var userEmail = this.refs.signUpEmail.value;
     
-    var user = new Parse.User();
-    user.set("username", userName);
-    user.set("password", userPassword);
-    user.set("email", userEmail);
-    
     var currentComponent = this;
     
-    user.signUp(null)
+    api.userSignup(userName,userPassword,userEmail)
     .then(function(user) {
     console.log("success")
       // go to show adventures

@@ -14,8 +14,7 @@ import Adventure from './components/Adventure';
 import AdventureDetails from './components/AdventureDetails';
 import Navbar from './components/Navbar';
 import FindAdventure from './components/FindAdventure';
-
-
+import CompleteAdventures from './components/CompleteAdventures';
 
 
 var routes = (
@@ -26,12 +25,13 @@ var routes = (
       <IndexRoute component={Login}/>
       <Route path="user-adventures" component={Adventures}/>
       <Route path="display-adventures" component={DisplayAdventures}/>
-      
+      <Route path="adventures" component={Adventures}/>
       <Route path="create-adventure" component={CreateAdventure}/>
       <Route path="adventure" component={Adventure}/>
       <Route path="adventure-details" component={AdventureDetails}/>
       <Route path="dashboard" component={Navbar}/>
-      <Route path="findadventure" component={FindAdventure} />
+      <Route path="find-adventure" component={FindAdventure} />
+      <Route path="complete-adventures" component={CompleteAdventures} />
       <Route path="*" component={NotFound}/>
     </Route>
   </Router>

@@ -1,14 +1,15 @@
 import React from 'react';
 
-var DisplayButton = React.createClass({
-    render() {
-        return (
-            <button onClick={this.props.DisplayCrawls}>Show Adventures</button>
-        );
-    }
-});
 
-// loadSamples : function() {
+// var DisplayButton = React.createClass({
+//     render() {
+//         return (
+//             <button onClick={this.props.DisplayCrawls}>Show Adventures</button>
+//         );
+//     }
+// });
+
+//  loadSamples : function() {
 //     this.setState({
 //       fishes : require('./sample-fishes')
 //     });

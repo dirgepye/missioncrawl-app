@@ -4,6 +4,8 @@ import {Link,History} from 'react-router';
 import reactMixin from 'react-mixin';
 //import Parse from 'parse';
 
+import api from '../parse/api';
+
 
 
 var Login = React.createClass({
@@ -21,7 +23,7 @@ var Login = React.createClass({
     
     var currentComponent = this;
     
-    Parse.User.logIn(profileUserName, profilePass)
+    api.userLogIn(profileUserName, profilePass)
     .then(function(user) {
         console.log("log in successful!");
         currentComponent.history.pushState(null, '/displaycrawls');

@@ -1,5 +1,5 @@
 var parseLib = require("./package").parseLib;
-var Parse = require(parseLib);
+var Parse = require('parse');
 var u = require('./user');
 
 // Initialize Parse with your Parse application javascript keys

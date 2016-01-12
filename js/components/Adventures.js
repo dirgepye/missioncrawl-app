@@ -1,6 +1,7 @@
 import React from 'react';
 import samples from '../adventures';
 import Adventure from './Adventure';
+import api from '../parse/api';
 
 
 
@@ -11,19 +12,8 @@ var AdventuresList = React.createClass({
         }
     },
     componentDidMount : function () {
-        
-        var Mission = Parse.Object.extend("Mission");
-        var query = new Parse.Query(Mission);
-        
         var currentComp = this;
         
-        query.find().then(function(missions){
-            currentComp.setState ({
-                adventures : missions
-            })
-            
-            console.log(missions[0]);
-        });
     },
     renderAdventure : function(adventureId) {
         return <Adventure key={adventureId} index={adventureId} details={this.state.adventures[adventureId]} />
@@ -35,6 +25,7 @@ var AdventuresList = React.createClass({
             
             <ul>
                 {Object.keys(this.state.adventures).map(this.renderAdventure)}
+                <p>Placeholder</p>
             </ul>
         );
     }

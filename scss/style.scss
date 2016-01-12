@@ -76,7 +76,7 @@ a {
     
 }
 
-.buttons {
+button {
     color: #DED9DC;
     background-color: #16718C;
     width: 75px;
@@ -86,6 +86,7 @@ a {
     margin: 0px 10px;
     width: 20%;
     margin: auto;
+    font-size: 17px;
     
 }
 
@@ -111,7 +112,8 @@ a {
 }
 
 .adventure {
-    margin-bottom: 20px;
+    margin: 0px 20px 20px 20px;
+    //margin-bottom: 20px;
     border-radius: 2px;
     padding: 10px;
     color: #646C75;
@@ -217,6 +219,13 @@ a {
     
 }
 
+.adventure__button {
+    
+    button {
+        margin: 10px 10px 0px 0px;
+    }
+}
+
 .crawl__map {
     float: right;
     width: 38%;
@@ -297,7 +306,20 @@ a {
 }
 
 
+///////////////////////////////
+// COMPLETED ADVENTURES ///////
+///////////////////////////////
 
+.completed-info {
+    border-top: solid 1px $light-gray;
+    margin-top: 10px;
+    
+    Textarea {
+        width: 100%;
+        resize: none;
+    }
+    
+}
 
 
 
