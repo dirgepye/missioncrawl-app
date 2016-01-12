@@ -1,3 +1,5 @@
+
+
 html {
   box-sizing: border-box;
 }
@@ -6,7 +8,7 @@ html {
   box-sizing: inherit;
 }
 
-
+@import 'variables';
 @import 'github-user';
 
 //UNIVERSAL CSS -----------------------------------
@@ -21,7 +23,8 @@ html {
 }
 
 .container {
-    
+    width: 900px;
+    margin: auto;
 }
 
 body {
@@ -50,11 +53,12 @@ a {
 }
 
 .header {
-    width: 50%;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 80px;
-    margin-bottom: 80px;
+    margin-bottom: 20px;
+    padding-top: 60px;
+    padding-bottom: 60px;
     text-align: center;
     
     border-bottom: solid 5px #16718C;
@@ -87,24 +91,13 @@ a {
     
 }
 
-.crawl--login {
+
     
-    p {
-        font-size: 13px;
-        margin: 7px 0px 0px 0px;
-        padding: 7px 0px 0px 0px;
-        border-top: solid 1px #A4ADB0;
-    }
     
-    h4 {
-        padding: 0px 0px 7px 0px;
-        margin: 0px 0px 7px 0px;
-        border-bottom: solid 1px #A4ADB0;
-    }
-}
-///////////////////
-//HOME 
-///////////////////
+
+/////////////////////////////////////
+//HOME    LOGIN     SIGN UP /////////
+/////////////////////////////////////
 
 .form {
     width: 100%;
@@ -119,8 +112,33 @@ a {
     background-color: #16718C;
 }
 
+.adventure {
+    margin-bottom: 20px;
+    border-radius: 2px;
+    padding: 10px;
+    color: #646C75;
+    background-color: #DED9DC;
+    font-size: 1em;
+}
 
-
+.adventure--login {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    p {
+        font-size: 13px;
+        margin: 7px 0px 0px 0px;
+        padding: 7px 0px 0px 0px;
+        border-top: solid 1px #A4ADB0;
+    }
+    
+    h4 {
+        padding: 0px 0px 7px 0px;
+        margin: 0px 0px 7px 0px;
+        border-bottom: solid 1px #A4ADB0;
+    }
+}
 
 ////////////////////
 //DISPLAY ADVENTURES -------------------------------
@@ -128,32 +146,15 @@ a {
 
 
 
-
-.crawl {
-    width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-    border-radius: 2px;
-    padding: 10px;
-    color: #646C75;
-    background-color: #DED9DC;
-    font-size: 22px;
-}
-
-.crawl--login {
-    width: 400px;
-}
-
 .crawl-display {
     background-color: white;
     padding: 10px 17px;
+    
     //margin: 0px 5px;
     
 }
 
 .crawl__title {
-    font-family: 'PT Sans', sans-serif;
     margin-bottom: 5px;
     border-bottom: solid 1px #DED9DC;
         
@@ -161,9 +162,6 @@ a {
             font-style: italic;
             font-size: 14px;
         }
-
-        
-    
 }
 
 
@@ -174,9 +172,11 @@ a {
     
 
 }
-.crawl__step {                                                    
-    padding: 0px;
-    margin: 0px;
+.crawl__details {                                                    
+    padding: 0px 0px 10px 0px;
+    margin: 0px 0px 10px 0px;
+    
+    border-bottom: solid 1px $med-gray;
     
     h1 {
         //font-family: Futura;
@@ -188,6 +188,43 @@ a {
         font-size: 18px;
         resize: none;
         outline: none;
+    }
+}
+
+.adventure__steps {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: stretch;
+    
+    ol {
+        width: 100%;
+        padding-right: 10px;
+    }
+    
+    ol li {
+        margin: 5px 0px;
+        padding: 10px 5px;
+        display: block;
+        background-color: white;
+    }
+    
+    ol li:hover {
+        background-color: #16718C;
+        color: #DED9DC;
+    }
+    
+    img {
+    
+    }
+    
+}
+
+.crawl__map {
+    float: right;
+    width: 38%;
+    
+    .crawl__map-style {
+
     }
 }
 
@@ -198,12 +235,13 @@ a {
 
 ////////////////////
 // CREATE ADVENTURE -----------------------------
-///////////////////
+////////////////////
 
 
 .create {
     width: 600px;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #DED9DC;
     border-radius: 2px;
     padding: 5px;
@@ -211,19 +249,67 @@ a {
 }
 
 .create__step {                                                    
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
     
     h1 {
         //font-family: Futura;
     }
     
-    textarea {
+    Textarea {
         width: 100%;
-        border: solid 2px #A4ADB0;
-        font-size: 18px;
+        height: 200px;
+        //border: solid 2px #A4ADB0;
+        //font-size: 18px;
         resize: none;
         outline: none;
+        
     }
 } 
+
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.navbar {
+    float: left;
+    width: 300px;
+    top: 200px;
+    
+    a {
+        color: $navy;
+        font-size: 1.4em;
+        padding: 10px 15px;
+        display: block;
+        
+    }
+    
+    li {
+        display: block;
+        background-color: $med-gray;
+        margin: 10px 5px 10px 0px;
+        
+        
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

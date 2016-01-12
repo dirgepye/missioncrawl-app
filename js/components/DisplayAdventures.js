@@ -1,6 +1,22 @@
 import React from 'react';
 
-var Crawls = React.createClass({
+var DisplayButton = React.createClass({
+    render() {
+        return (
+            <button onClick={this.props.DisplayCrawls}>Show Adventures</button>
+        );
+    }
+});
+
+// loadSamples : function() {
+//     this.setState({
+//       fishes : require('./sample-fishes')
+//     });
+//   },
+
+
+
+var Adventures = React.createClass({
     render() {
         return (
             <div className="crawl">
@@ -31,7 +47,19 @@ var Crawls = React.createClass({
     <DisplayCrawls />
 */
 
-var DisplayCrawls = React.createClass({
+var DisplayAdventures = React.createClass({
+    getInitialState : function() {
+    return {
+      adventures : {}
+        };
+    },
+    loadAdventure : function() {
+        this.setState({
+            adventures : require('../adventures')
+            
+        });
+        console.log(this.setState);
+    },
     render() {
         return (
             <div className="container">
@@ -39,12 +67,13 @@ var DisplayCrawls = React.createClass({
                     <h1>Adventures</h1>
                     <h3>Select to start!</h3>
                 </div>
-                <Crawls />
-            <button></button>
-            <button></button>
+                <Adventures />
+            <button>Next</button>
+            <button>Previous</button>
             </div>
         );
     }
+    
 });
 
-export default DisplayCrawls;
+export default DisplayAdventures;
