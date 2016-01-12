@@ -34,26 +34,31 @@ query.get("ZWhpXimc5a")
     // });
     
 
-    // api.listStepsOfMission()
-    // .then(function(result){
-    //     console.log(result);
-    // });
+    api.listStepsOfMission("DXEfdX7Job")
+    .then(function(result){
+        console.log(result);
+    });
     
     // api.userCurrentStep("ZWhpXimc5a").then(function(result){
     //     console.log(result);
     // });
     
     
-    // api.assignStepsToMission("go the that bar","step desc",'','bxreD6KsvJ').then(function(result){
+    // api.assignStepsToMission("at the last dessert shop","eat one more, even if you're full!",'','DXEfdX7Job').then(function(result){
         
     // });
     
-    api.getMission("KAE1EVMdaM").then(function(mission){
+    // api.getMission("KAE1EVMdaM").then(function(mission){
 
-        api.userCurrentStep(mission,user).then(function(step){
-            console.log(step.get("title"));
-        })
-    })
+    //     api.userCurrentStep(mission,user).then(function(step){
+    //         console.log(step.get("title"));
+    //     })
+    // })
+    
+    // api.getUserMissions(user)
+    // .then(function(result){
+    //     console.log(result);
+    // })
     
 })
 
