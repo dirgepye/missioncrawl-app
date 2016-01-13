@@ -21,9 +21,8 @@ var AdventuresList = React.createClass({
         })
         
     },
-   
-    renderAdventure : function(adventure,index) {
-        return <Adventure key={index} index={index} details={this.state.adventures[index]} />
+    renderAdventure : function(adventureParseObject, index) {
+        return <Adventure key={adventureParseObject.id} index={index} details={adventureParseObject} />
     },
     
     render() {

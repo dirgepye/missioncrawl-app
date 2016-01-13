@@ -44,7 +44,7 @@ query.get("ZWhpXimc5a")
     //     console.log(result);
     // });
     
-    api.getMissionList().then(function(result){
+    api.getUserMissions(user).then(function(result){
         console.log(result);
     });
     

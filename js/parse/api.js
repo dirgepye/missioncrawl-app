@@ -30,7 +30,8 @@ module.exports = {
   userSignup: u.userSignup,
   userLogIn: u.userLogIn,
   getFirstStep: getFirstStep,
-  getMissionList:getMissionList
+  getMissionList:getMissionList,
+  getCurrentUser:getCurrentUser
 };
 
 
@@ -40,7 +41,6 @@ module.exports = {
 function getUserMissions(currentUser) { // formerly named findAllMissions
 
   var currentUser = currentUser || Parse.User.current();
-
   var query = new Parse.Query(Subscriptions);
 
   return query
@@ -225,6 +225,10 @@ function getMission(id) {
   return query.get(id);
 }
 
+
+function getCurrentUser(){
+  return Parse.User.current();
+}
 
 //listStepsOfMission("bxreD6KsvJ");
 

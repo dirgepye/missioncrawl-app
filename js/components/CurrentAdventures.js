@@ -12,8 +12,10 @@ var CurrentAdventures = React.createClass({
         }
     },
     componentDidMount : function() {
-        
+
         var currentReactComponent = this;
+
+        currentReactComponent.setState({currentUser: api.getCurrentUser()});
 
         api.getUserMissions().then(function(arrayOfMissions){
             currentReactComponent.setState ({
