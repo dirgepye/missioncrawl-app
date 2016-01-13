@@ -8,24 +8,29 @@ import api from '../parse/api';
 var AdventuresList = React.createClass({
     getInitialState : function() {
         return {
-            adventures : {}
+            adventures : []
         }
     },
     componentDidMount : function () {
         var currentComp = this;
         
-    },
-    renderAdventure : function(adventureId) {
-        return <Adventure key={adventureId} index={adventureId} details={this.state.adventures[adventureId]} />
+        api.getMissionList().then(function(result){
+            currentComp.setState({adventures:result}) 
+                
             
+        })
+        
+    },
+   
+    renderAdventure : function(adventure,index) {
+        return <Adventure key={index} index={index} details={this.state.adventures[index]} />
     },
     
     render() {
         return (
-            
+        
             <ul>
-                {Object.keys(this.state.adventures).map(this.renderAdventure)}
-                <p>Placeholder</p>
+                {this.state.adventures.map(this.renderAdventure)}
             </ul>
         );
     }
