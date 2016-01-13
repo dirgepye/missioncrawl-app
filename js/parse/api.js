@@ -30,8 +30,8 @@ module.exports = {
   userSignup: u.userSignup,
   userLogIn: u.userLogIn,
   getFirstStep: getFirstStep,
-  getMissionList:getMissionList,
-  getCurrentUser:getCurrentUser
+  getMissionList: getMissionList,
+  getCurrentUser: getCurrentUser
 };
 
 
@@ -74,12 +74,13 @@ function listStepsOfMission(missionId) {
 
 
 //ADD steps to Mission
-function assignStepsToMission(title, description, location, missionObj) {
+function assignStepsToMission(title, description, GeoPoint, missionObj) {
 
+  var point = new Parse.GeoPoint(GeoPoint);
   var newStep = new Step();
   newStep.set("title", title);
   newStep.set("description", description);
-  // newStep.set("location", location);
+  newStep.set("location", point);
 
   var query = new Parse.Query(Mission);
 
@@ -210,7 +211,7 @@ function getMission(id) {
 }
 
 
-function getCurrentUser(){
+function getCurrentUser() {
   return Parse.User.current();
 }
 
@@ -226,25 +227,3 @@ function getCurrentUser(){
 
 
 //Complete a step //enter KEY
-
-// User GeoPoint location
-
-function userLocation(point) {
-
-  var address = request.object.get("address1");
-  var geocoder;
-  var point = new Parse.GeoPoint({
-    latitude, longitude
-  });
-
-  placeObject.set("location", point);
-
-  var userGeoPoint = userObject.get("location");
-  var query = new Parse.Query(PlaceObject);
-
-  query.near("location", userGeoPoint);
-  query.find().then(function(placesObjects) {
-
-  })
-}
-
