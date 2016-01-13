@@ -30,7 +30,7 @@ module.exports = {
   userSignup: u.userSignup,
   userLogIn: u.userLogIn,
   getFirstStep: getFirstStep,
-  getMissionList:getMissionList
+  getMissionList: getMissionList
 };
 
 
@@ -123,8 +123,8 @@ function subscribeToMission(missionId) { // formerly named assignUserToMission
 function getMissionList() {
   var mission_query = new Parse.Query(Mission);
 
- return mission_query.find();
-   
+  return mission_query.find();
+
 }
 
 // Get First Step of a Mission
@@ -149,11 +149,11 @@ function getFirstStep(missionId) {
 function completeStep(stepObj, missionObj, user) {
 
   // set complete? to true on the subscriptions
-  
-  if (completed){
-    //check off current step
-    //add line in Subscriptions for next step
-  }
+
+
+  //check off current step
+  //add line in Subscriptions for next step
+
 
 
   // add a new subscriptions for the next step
@@ -162,22 +162,6 @@ function completeStep(stepObj, missionObj, user) {
 }
 
 function getNextStep(missionObj, currentStep) {
-
-  var query = new Parse.Query("Subscriptions");
-  var user = Parse.User.current();
-
-  query.get(currentStep).then(function(mission) {
-
-    var subscription = new Subscriptions();
-    subscription.set("Mission", mission);
-    subscription.set("User", user);
-    subscription.set("Step", getFirstStep(mission));
-
-    subscription.save();
-
-  });
-  
-  
 
 }
 
@@ -238,3 +222,25 @@ function getMission(id) {
 
 
 //Complete a step //enter KEY
+
+// User GeoPoint location
+
+function userLocation(point) {
+
+  var address = request.object.get("address1");
+  var geocoder;
+  var point = new Parse.GeoPoint({
+    latitude, longitude
+  });
+
+  placeObject.set("location", point);
+
+  var userGeoPoint = userObject.get("location");
+  var query = new Parse.Query(PlaceObject);
+
+  query.near("location", userGeoPoint);
+  query.find().then(function(placesObjects) {
+
+  })
+}
+
