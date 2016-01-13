@@ -5,7 +5,7 @@ var api = require('./api');
 
 //setting a user for simulating the current user
 var query = new Parse.Query(Parse.User);
-query.get("ZWhpXimc5a")
+query.get("ifYjtzkhKS")
 .then(function(user){
     console.log("username",user.get("username"));
 
@@ -34,7 +34,7 @@ query.get("ZWhpXimc5a")
     // });
     
 
-    // api.listStepsOfMission("DXEfdX7Job")
+    // api.listStepsOfMission("drDo8bvZLy")
     // .then(function(result){
     //     console.log(result);
     // });
@@ -44,10 +44,13 @@ query.get("ZWhpXimc5a")
     //     console.log(result);
     // });
     
-    api.getUserMissions(user).then(function(result){
-        console.log(result);
-    });
+    // api.getUserMissions(user).then(function(result){
+    //     console.log(result);
+    // });
     
+    //     api.subscribeToMission("drDo8bvZLy").then(function(result){
+    //     console.log(result);
+    // });
     
     
     // api.userCurrentStep("ZWhpXimc5a").then(function(result){
@@ -55,9 +58,9 @@ query.get("ZWhpXimc5a")
     // });
     
     
-    // api.assignStepsToMission("at the last dessert shop","eat one more, even if you're full!",'','DXEfdX7Job').then(function(result){
+    api.assignStepsToMission("La Commune2","Visit the geniuses at DecodeMTL!",{latitude:45.5077, longitude:-73.555594},'drDo8bvZLy').then(function(result){
         
-    // });
+    });
     
     // api.getMission("KAE1EVMdaM").then(function(mission){
 
