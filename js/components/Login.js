@@ -26,7 +26,7 @@ var Login = React.createClass({
     api.userLogIn(profileUserName, profilePass)
     .then(function(user) {
         console.log("log in successful!");
-        currentComponent.history.pushState(null, '/displaycrawls');
+        currentComponent.history.pushState(null, '/currentadventures');
     },
     
     function(error) {

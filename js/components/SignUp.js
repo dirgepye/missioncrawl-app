@@ -26,7 +26,7 @@ var SignUp = React.createClass({
     console.log("success")
       // go to show adventures
       
-     currentComponent.history.pushState(null, '/displaycrawls');  
+     currentComponent.history.pushState(null, '/findadventure');
   //react
   },
   function(error) {
