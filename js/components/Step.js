@@ -5,7 +5,7 @@ import api from '../parse/api';
 
 
 
-var AdventuresList = React.createClass({
+var AdventuresSteps = React.createClass({
     getInitialState : function() {
         return {
             adventures : []

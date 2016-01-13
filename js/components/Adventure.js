@@ -1,8 +1,22 @@
 import React from 'react';
 import samples from '../adventures';
 
+import api from '../parse/api';
+
 
 var Adventure = React.createClass({
+    getInitialState(){
+        return {
+            steps: []
+        }
+    },
+    componentDidMount() {
+        var currentComp = this;
+        
+        api.listStepsOfMission(this.props.details.id).then(function(result) {
+            currentComp.setState({steps: result})
+        })
+    },
     render() {
         var title = this.props.details.get('title');
         var description = this.props.details.get('description');
@@ -21,13 +35,14 @@ var Adventure = React.createClass({
                     </div>
                 </div>
                 <div className="adventure-display">
-                    <p> test test</p>
+                    
     
                 </div>
+                <AdventureSteps adventureId={this.props.details.id}/>
                 <div className="adventure__button">
                     <button>More Info</button>
                     <button>Start!</button>
-                </div>    
+                </div>  
             </div>
         );
     }
