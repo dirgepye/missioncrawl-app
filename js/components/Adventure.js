@@ -12,7 +12,7 @@ var Adventure = React.createClass({
         return (
             <div className="adventure">
                 <div className="adventure-display">
-                    <h2 className="adventure__title">{title}, <span className="location">{location}</span></h2>
+                    <h2 className="adventure__title">{title},</h2>
                     <p className="adventure__description">{description}</p>
                     <div className="adventure-category">
                         <ul>
