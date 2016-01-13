@@ -8,7 +8,7 @@ var Navbar = React.createClass ({
             <div className="navbar">
                 <ul>
                     <li><Link to="/findadventure">Find Adventures</Link></li>
-                    <li><Link to="/currentadventure">In Progress</Link></li>
+                    <li><Link to="/currentadventures">In Progress</Link></li>
                     <li><Link to="/completedadventures">Completed Adventures</Link></li>
                     <li><Link to="/newadventure">Create Adventures</Link></li>
                 </ul>

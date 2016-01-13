@@ -1,16 +1,17 @@
 import React from 'react';
 import Adventure from './Adventure';
 
+import api from '../parse/api';
 
 
 
 var CurrentAdventures = React.createClass({
     getInitialState : function() {
         return {
-            adventures : []
-
+            adventures: []
+        }
     },
-    componentDidMount : function () {
+    componentDidMount : function() {
         
         var currentReactComponent = this;
 
@@ -20,24 +21,18 @@ var CurrentAdventures = React.createClass({
             })
         });
     },
-    renderAdventure : function(adventureParseObject) {
-        return <Adventure key={adventureId} index={adventureId} details={this.state.adventures[adventureId]} />
+    renderAdventure : function(adventureParseObject, index) {
+        return <Adventure key={adventureParseObject.id} index={index} details={adventureParseObject} />
             
     },
-    
     render: function() {
         return (
-            
             <ul>
-                {
-                    ///Object.keys(this.state.adventures).map(this.renderAdventure)
-
-                    this.state.adventures.map(this.renderAdventure);
-                }
+                {this.state.adventures.map(this.renderAdventure)}
             </ul>
         );
     }
 });
 
 
-export default AdventuresList;
+export default CurrentAdventures;

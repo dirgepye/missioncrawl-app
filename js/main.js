@@ -15,6 +15,7 @@ import CreateAdventure from './components/CreateAdventure';
 //import Navbar from './components/Navbar';
 import FindAdventure from './components/FindAdventure';
 import CompleteAdventures from './components/CompleteAdventures';
+import CurrentAdventures from './components/CurrentAdventures';
 
 
 var routes = (
@@ -24,7 +25,7 @@ var routes = (
             <Route path="login" component={Login}/>
             <Route path="signup" component={SignUp}/>
             <Route path="findadventure" component={FindAdventure}/>
-            <Route path="currentadventure" component={CurrentAdventures}/>
+            <Route path="currentadventures" component={CurrentAdventures}/>
             <Route path="adventures" component={Adventures}/>
             <Route path="completedadventures" component={CompleteAdventures}/>
             <Route path="newadventure" component={CreateAdventure}/>
