@@ -194,7 +194,7 @@ function completeStep(missionId, user) {
           
         }
         else {
-          return "Congrats!";
+          return "completed";
         }
       })
     })
