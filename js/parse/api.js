@@ -88,15 +88,17 @@ function assignStepsToMission(title, description, GeoPoint, missionObj) {
 
   return newStep.save().then(function(savedStep) {
 
-    return query.get(missionObj).then(function(mission) {
+    return query
+      .get(missionObj)
+      .then(function(mission) {
 
-      var stepRelation = mission.get("steps");
+        var stepRelation = mission.get("steps");
 
-      stepRelation.add(savedStep);
+        stepRelation.add(savedStep);
 
-      return mission.save();
+        return mission.save();
 
-    });
+      });
   });
 }
 
@@ -157,32 +159,51 @@ function completeStep(missionId, user) {
   var currentUser = user || Parse.User.current();
   //console.log(currentUser);
 
-  var mission = new Mission({
-    objectId: missionId
-  });
+  var missionQuery = new Parse.Query(Mission);
 
-  return query
-    .equalTo('user', currentUser)
-    .equalTo('completed', false)
-    .equalTo('mission', mission)
-    .first()
-    .then(function(userSubscription) {
-      //return userSubscription;       //returns subscription object
-      userSubscription.set('completed', true);
-      userSubscription.save();
+  return missionQuery
+    .get(missionId)
+    .then(function(mission){
+      
+      return query
+      .equalTo('user', currentUser)
+      .equalTo('completed', false)
+      .equalTo('mission', mission)
+      .include('step')
+      .first()
+      .then(function(userSubscription) {
+        
+        userSubscription.set('completed', true); //change 'completed' to true
+  
+        userSubscription.save(); //save change
+        
+        var completedStep = userSubscription.get("step");
+        
+        return getNextStep(mission,completedStep);
 
-      getNextStep(userSubscription);
-
-      var subscription = new Subscriptions();
-
-      subscription.set("Mission", mission);
-      subscription.set("User", user);
-      subscription.set("Step", currentStep(mission));
-
-      subscription.save();
+      })
+      .then(function(nextStep){
+        if (nextStep) {
+          console.log(nextStep);
+          var subscription = new Subscriptions();
+          subscription.set("mission", mission);
+          subscription.set("user", user);
+          subscription.set("step", nextStep);
+      
+          return subscription.save();
+          
+        }
+        else {
+          return "Congrats!";
+        }
+      })
     })
 
-});
+  
+    
+
+  // getNextStep(userSubscription);
+
 }
 
 
@@ -201,17 +222,11 @@ function completeStep(missionId, user) {
 // }
 
 function getNextStep(missionObj, currentStep) {
-
-  var user = Parse.User.current();
-  var query = new Parse.Query(Mission);
-  var currentStep =
-
-    query.get(missionObj).then(function(mission) {
-        var subscription = new Subscriptions();
-
-
-
-      }
+  
+  var nextStepOrder = currentStep.get("stepOrder") + 1;
+  
+  return missionObj.relation("steps").query().equalTo("stepOrder",nextStepOrder).first();
+}
 
       //User's current step
 
