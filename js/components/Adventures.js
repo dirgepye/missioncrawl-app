@@ -15,7 +15,7 @@ var AdventuresList = React.createClass({
         var currentComp = this;
         
         api.getMissionList().then(function(result){
-            console.log(result);
+            //console.log(result);
             currentComp.setState({adventures:result}) 
         
         })

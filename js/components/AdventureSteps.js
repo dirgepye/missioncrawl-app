@@ -46,7 +46,6 @@ var AdventureSteps = React.createClass({
                             return <Step key={stepParseObject.id} index={index} details={stepParseObject} />
                         })}
                     </ol>
-                    <img src="http://placecorgi.com/450/450" />
                 </div>
             </div>
         );
