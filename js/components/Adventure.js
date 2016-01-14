@@ -1,6 +1,6 @@
 import React from 'react';
 import samples from '../adventures';
-
+import AdventureSteps from './AdventureSteps';
 import api from '../parse/api';
 
 
@@ -39,6 +39,7 @@ var Adventure = React.createClass({
     
                 </div>
                 <AdventureSteps adventureId={this.props.details.id}/>
+                
                 <div className="adventure__button">
                     <button>More Info</button>
                     <button>Start!</button>

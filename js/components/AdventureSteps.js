@@ -1,40 +1,42 @@
 import React from 'react';
+import samples from '../adventures';
 import Adventure from './Adventure';
-
+import Adventures from './Adventures';
 import api from '../parse/api';
 
 
 
-var CurrentAdventures = React.createClass({
+var AdventureSteps = React.createClass({
     getInitialState : function() {
         return {
-            adventures: []
+            steps: []
         }
     },
-    componentDidMount : function() {
-
-        var currentReactComponent = this;
-
-        currentReactComponent.setState({currentUser: api.getCurrentUser()});
-
-        api.getUserMissions().then(function(arrayOfMissions){
-            currentReactComponent.setState ({
-                adventures : arrayOfMissions
-            })
-        });
+    componentDidMount : function () {
+        var currentComp = this;
+        
+        api.getMissionList().then(function(result){
+            currentComp.setState({steps:result}) 
+        
+            
+        })
+        
     },
     renderAdventure : function(adventureParseObject, index) {
         return <Adventure key={adventureParseObject.id} index={index} details={adventureParseObject} />
-            
     },
-    render: function() {
+    
+    render() {
         return (
-            <ul>
-                {this.state.adventures.map(this.renderAdventure)}
-            </ul>
+            <div>
+                <p>fdsahgdahah</p>
+                <ul>
+                    {this.state.adventures.map(this.renderAdventure)}
+                </ul>
+            </div>
         );
     }
 });
 
 
-export default CurrentAdventures;
+export default AdventureSteps;

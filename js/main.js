@@ -18,6 +18,9 @@ import CompleteAdventures from './components/CompleteAdventures';
 import CurrentAdventures from './components/CurrentAdventures';
 
 
+
+
+
 var routes = (
     <Router history={createHistory()}>
     <Route path="login" component={Login}/>
@@ -36,3 +39,6 @@ var routes = (
 );
 
 ReactDOM.render(routes, document.querySelector('#app'));
+
+
+
