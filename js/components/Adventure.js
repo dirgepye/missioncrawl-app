@@ -4,25 +4,8 @@ import AdventureSteps from './AdventureSteps';
 import api from '../parse/api';
 
 var Adventure = React.createClass({
-    getInitialState(){
-        return {
-            steps: []
-        }
-    },
-    componentDidMount() {
-        var currentComp = this;
-        
-        api.listStepsOfMission(this.props.details.id).then(function(result) {
-            currentComp.setState({steps: result})
-        })
-    },
     subscribeTo() {
         api.subscribeToMission(this.props.details.id);
-    },
-    renderFirstStep() {
-        api.getFirstStep(this.props.details).then(function(step){
-            //return <Adventure key={step.id} details={step} />
-        });
     },
     render() {
         var title = this.props.details.get('title');
@@ -32,24 +15,25 @@ var Adventure = React.createClass({
         
         return (
             <div className="adventure">
-                <div className="adventure-display">
-                    <h2 className="adventure__title">{title},</h2>
-                    <p className="adventure__description">{description}</p>
-                    <div className="adventure-category">
-                        <ul>
-                            <li><a href="#">category</a></li>
-                        </ul>
+                <div className="adventure__details">
+                    <div className="adventure-display">
+                        <h2 className="adventure__title">{title},</h2>
+                        <p className="adventure__description">{description}</p>
+                        <div className="adventure-category">
+                            <ul>
+                                <li><a href="#">category</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div className="adventure-display">
-                    
-    
-                </div>
-                <ul>
-                    {this.renderFirstStep}
-                </ul>
-                <div className="adventure__button">
-                    <button onClick={this.subscribeTo}>Start the adventure!</button>
+                    <div className="adventure-display">
+                        
+        
+                    </div>
+                    <AdventureSteps adventure={this.props.details} context={this.props.context}/>
+
+                    <div className="adventure__button">
+                        <button onClick={this.subscribeTo}>Start the adventure!</button>
+                    </div>
                 </div>
             </div>
         );

@@ -3,6 +3,7 @@ import samples from '../adventures';
 import Adventure from './Adventure';
 import Adventures from './Adventures';
 import api from '../parse/api';
+import Step from './Step';
 
 
 
@@ -15,24 +16,38 @@ var AdventureSteps = React.createClass({
     },
     componentDidMount : function () {
         var currentComp = this;
-        
-        api.listStepsOfMission(this.props.adventureId).then(function(result){
-            currentComp.setState({steps:result})
-            console.log(result)
-        })
+
+        console.log(this.props.context);
+
+        if (this.props.context === 'unsubscribed') {
+            api.getFirstStep(this.props.adventure).then(function(step){
+                var result = [];
+                result.push(step);
+                currentComp.setState({steps: result})
+            });
+        }
+        else {
+            api.listStepsOfMission(this.props.adventure.id).then(function(result){
+                currentComp.setState({steps:result})
+                //console.log(result)
+            })
+        }
+
+
         
     },
-    renderSteps : function(stepParseObject, index) {
-        return <Adventure key={stepParseObject.id} index={index} details={stepParseObject} />
-    },
-    
     render() {
         return (
-            <div>
-                <p>test test test</p>
-                <ul>
-                    {this.state.steps.map(this.renderSteps)}
-                </ul>
+            <div className="adventure__details">
+                <div className="adventure__steps">
+                
+                    <ol>
+                        {this.state.steps.map(function(stepParseObject, index) {
+                            return <Step key={stepParseObject.id} index={index} details={stepParseObject} />
+                        })}
+                    </ol>
+                    <img src="http://placecorgi.com/450/450" />
+                </div>
             </div>
         );
     }
@@ -42,3 +57,16 @@ var AdventureSteps = React.createClass({
 export default AdventureSteps;
 
 
+//
+
+
+// <div className="adventure__steps">
+//                         <ol>
+//                             <li className="complete">fafdssdfa</li>
+//                             <li className="current">dsafsdfasdfds</li>
+//                             <li className="hidden">fdsafdsfadsfsd</li>
+//                             <li className="hidden">fdsafdsfsa</li>
+//                         </ol>
+//                         <img src="http://placecorgi.com/450/450" />
+                        
+//                     </div>
