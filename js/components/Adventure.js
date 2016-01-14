@@ -3,7 +3,6 @@ import samples from '../adventures';
 import AdventureSteps from './AdventureSteps';
 import api from '../parse/api';
 
-
 var Adventure = React.createClass({
     getInitialState(){
         return {
@@ -16,6 +15,14 @@ var Adventure = React.createClass({
         api.listStepsOfMission(this.props.details.id).then(function(result) {
             currentComp.setState({steps: result})
         })
+    },
+    subscribeTo() {
+        api.subscribeToMission(this.props.details.id);
+    },
+    renderFirstStep() {
+        api.getFirstStep(this.props.details).then(function(step){
+            //return <Adventure key={step.id} details={step} />
+        });
     },
     render() {
         var title = this.props.details.get('title');
@@ -38,12 +45,12 @@ var Adventure = React.createClass({
                     
     
                 </div>
-                <AdventureSteps adventureId={this.props.details.id}/>
-                
+                <ul>
+                    {this.renderFirstStep}
+                </ul>
                 <div className="adventure__button">
-                    <button>More Info</button>
-                    <button>Start!</button>
-                </div>  
+                    <button onClick={this.subscribeTo}>Start the adventure!</button>
+                </div>
             </div>
         );
     }
