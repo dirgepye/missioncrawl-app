@@ -11,27 +11,35 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import CreateAdventure from './components/CreateAdventure';
 //import Adventure from './components/Adventure';
-//import AdventureDetails from './components/AdventureDetails';
+import AdventureDetails from './components/AdventureDetails';
 //import Navbar from './components/Navbar';
 import FindAdventure from './components/FindAdventure';
 import CompleteAdventures from './components/CompleteAdventures';
 import CurrentAdventures from './components/CurrentAdventures';
 
 
+
+
+
+
 var routes = (
     <Router history={createHistory()}>
+    <Route path="login" component={Login}/>
+    <Route path="signup" component={SignUp}/>
         <Route path="/" component={App}>
             <IndexRoute component={Login}/>
-            <Route path="login" component={Login}/>
-            <Route path="signup" component={SignUp}/>
             <Route path="findadventure" component={FindAdventure}/>
             <Route path="currentadventures" component={CurrentAdventures}/>
             <Route path="adventures" component={Adventures}/>
             <Route path="completedadventures" component={CompleteAdventures}/>
             <Route path="newadventure" component={CreateAdventure}/>
+            <Route path="adventuredetails" component={AdventureDetails}/>
             <Route path="*" component={NotFound}/>
         </Route>
     </Router>
 );
 
 ReactDOM.render(routes, document.querySelector('#app'));
+
+
+

@@ -15,14 +15,14 @@ var AdventuresList = React.createClass({
         var currentComp = this;
         
         api.getMissionList().then(function(result){
+            console.log(result);
             currentComp.setState({adventures:result}) 
-                
-            
+        
         })
         
     },
     renderAdventure : function(adventureParseObject, index) {
-        return <Adventure key={adventureParseObject.id} index={index} details={adventureParseObject} />
+        return <Adventure key={adventureParseObject.id} index={index} details={adventureParseObject} context="unsubscribed"/>
     },
     
     render() {

@@ -105,20 +105,21 @@ function assignStepsToMission(title, description, GeoPoint, missionObj) {
 
 
 //Subscribe to a Mission
-function subscribeToMission(missionId) { // formerly named assignUserToMission
+function subscribeToMission(missionId,currentUser) { // formerly named assignUserToMission
 
-  var user = Parse.User.current(); //user can assign other users to missions so not necessarily current user
-
+  var currentUser = currentUser || Parse.User.current();
   var query = new Parse.Query("Mission");
 
-  query.get(missionId).then(function(mission) {
+  return query.get(missionId).then(function(mission) {
 
-    var subscription = new Subscriptions();
-    subscription.set("Mission", mission);
-    subscription.set("User", user);
-    subscription.set("Step", getFirstStep(mission));
+    var subscription = new Subscriptions({"completed":false});
+    subscription.set("mission", mission);
+    subscription.set("user", currentUser);
 
-    subscription.save();
+    return getFirstStep(mission).then(function(firstStep){
+      subscription.set("step", firstStep);
+      return subscription.save();
+    });
 
   });
 }
@@ -132,24 +133,12 @@ function getMissionList() {
 
 }
 
+
 // Get First Step of a Mission
-
-function getFirstStep(missionId) {
-
-  var query = new Parse.Query(Mission);
-
-  return query
-    .get(missionId)
-    .then(function(currentMission) {
-      return currentMission
-        .relation("steps")
-        .query()
-        .equalTo("stepOrder", 1)
-        .find();
-    })
+function getFirstStep(mission) {
+    return mission.relation("steps").query().ascending("stepOrder").find()
     .then(function(arrayOfSteps) {
-      return arrayOfSteps;
-
+        return arrayOfSteps[0];
     });
 }
 
@@ -228,65 +217,65 @@ function getNextStep(missionObj, currentStep) {
   return missionObj.relation("steps").query().equalTo("stepOrder",nextStepOrder).first();
 }
 
-      //User's current step
+//User's current step
 
-      function userCurrentStep(currentUser, missionId) {
+function userCurrentStep(currentUser, missionId) {
 
-        var query = new Parse.Query(Subscriptions);
-        var currentUser = currentUser || Parse.User.current();
+  var query = new Parse.Query(Subscriptions);
+  var currentUser = currentUser || Parse.User.current();
 
-        return query
-          .equalTo('user', currentUser)
-          .equalTo('mission', missionId)
+  return query
+    .equalTo('user', currentUser)
+    .equalTo('mission', missionId)
 
-        .include('step')
-          .find()
-          .then(function(subscriptions) {
-            return subscriptions.get('step');
-          });
+  .include('step')
+    .find()
+    .then(function(subscriptions) {
+      return subscriptions.get('step');
+    });
+}
+
+
+function stepsProgress(key) { //do we need key???
+  var query = new Parse.Query(Subscriptions);
+  var currentUser = currentUser || Parse.User.current();
+
+  query
+    .equalTo('user', currentUser)
+    .include('step') //?? do we include step here??
+    .find()
+    .then(function(currentStep) {
+      return currentStep.get("currentStep");
+    }).then(function(step) {
+      if (key) {
+        return step + 1; // return the NEXT step
       }
-
-
-      function stepsProgress(key) { //do we need key???
-        var query = new Parse.Query(Subscriptions);
-        var currentUser = currentUser || Parse.User.current();
-
-        query
-          .equalTo('user', currentUser)
-          .include('step') //?? do we include step here??
-          .find()
-          .then(function(currentStep) {
-            return currentStep.get("currentStep");
-          }).then(function(step) {
-            if (key) {
-              return step + 1; // return the NEXT step
-            }
-            else {
-              return step; // return the CURRENT step
-            }
-          });
+      else {
+        return step; // return the CURRENT step
       }
+    });
+}
 
 
-      function getMission(id) {
-        var query = new Parse.Query(Mission);
-        return query.get(id);
-      }
+function getMission(id) {
+  var query = new Parse.Query(Mission);
+  return query.get(id);
+}
 
 
-      function getCurrentUser() {
-        return Parse.User.current();
-      }
+function getCurrentUser() {
+  return Parse.User.current();
+}
 
-      //listStepsOfMission("bxreD6KsvJ");
-
-
-
-
-      //a step
+//listStepsOfMission("bxreD6KsvJ");
 
 
 
 
+//a step
 
-      //Complete a step //enter KEY
+
+
+
+
+//Complete a step //enter KEY

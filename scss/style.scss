@@ -10,8 +10,23 @@ html {
 @import 'github-user';
 @import 'transitions';
 
+///////////////////
 //UNIVERSAL CSS -----------------------------------
+//////////////////
 
+#app {
+    //position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.65);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+    
 * {
     font-family: 'PT Sans', sans-serif;
     font-weight: 400;
@@ -27,7 +42,10 @@ html {
 }
 
 body {
-    background-color: #646C75;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/4/49/Oxford_Street_December_2006.jpeg");
+    background-size: 100%;
+    
+    //background-color: #646C75;
     // width: 100%;
     // background-position: 50% 50%;
     

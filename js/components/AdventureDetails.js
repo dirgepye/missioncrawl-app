@@ -35,6 +35,8 @@ var AdventureDetails = React.createClass ({
                         <img src="http://placecorgi.com/450/450" />
                         
                     </div>
+                    <button>More Info</button>
+                    <button>Start</button>
                 </div>
             </div>
         );
