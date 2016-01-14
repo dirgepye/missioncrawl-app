@@ -1,5 +1,4 @@
 import React from 'react';
-import samples from '../adventures';
 import AdventureSteps from './AdventureSteps';
 import api from '../parse/api';
 
@@ -21,7 +20,7 @@ var Adventure = React.createClass({
         var title = this.props.details.get('title');
         var description = this.props.details.get('description');
         var location = this.props.details.get('Location');
-        // var categories = this.props.details.categories;
+        //var categories = this.props.details.categories;
         
         return (
             <div className="adventure">
