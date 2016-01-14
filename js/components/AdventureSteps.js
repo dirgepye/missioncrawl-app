@@ -10,28 +10,28 @@ var AdventureSteps = React.createClass({
     getInitialState : function() {
         return {
             steps: []
+        
         }
     },
     componentDidMount : function () {
         var currentComp = this;
         
-        api.getMissionList().then(function(result){
-            currentComp.setState({steps:result}) 
-        
-            
+        api.listStepsOfMission(this.props.adventureId).then(function(result){
+            currentComp.setState({steps:result})
+            console.log(result)
         })
         
     },
-    renderAdventure : function(adventureParseObject, index) {
-        return <Adventure key={adventureParseObject.id} index={index} details={adventureParseObject} />
+    renderSteps : function(stepParseObject, index) {
+        return <Adventure key={stepParseObject.id} index={index} details={stepParseObject} />
     },
     
     render() {
         return (
             <div>
-                <p>fdsahgdahah</p>
+                <p>test test test</p>
                 <ul>
-                    {this.state.adventures.map(this.renderAdventure)}
+                    {this.state.steps.map(this.renderSteps)}
                 </ul>
             </div>
         );
@@ -40,3 +40,5 @@ var AdventureSteps = React.createClass({
 
 
 export default AdventureSteps;
+
+
