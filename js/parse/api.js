@@ -31,7 +31,9 @@ module.exports = {
   userLogIn: u.userLogIn,
   getFirstStep: getFirstStep,
   getMissionList: getMissionList,
-  getCurrentUser: getCurrentUser
+  getCurrentUser: getCurrentUser,
+  completeStep: completeStep,
+  userCurrentStep: userCurrentStep
 };
 
 
@@ -137,8 +139,11 @@ function getFirstStep(missionId) {
   return query
     .get(missionId)
     .then(function(currentMission) {
-
-      return currentMission.relation("steps").query().equalTo("stepOrder", 1).find();
+      return currentMission
+        .relation("steps")
+        .query()
+        .equalTo("stepOrder", 1)
+        .find();
     })
     .then(function(arrayOfSteps) {
       return arrayOfSteps;
@@ -146,84 +151,127 @@ function getFirstStep(missionId) {
     });
 }
 
+function completeStep(missionId, user) {
 
-function completeStep(stepObj, missionObj, user) {
-
-  // set complete? to true on the subscriptions
-
-
-  //check off current step
-  //add line in Subscriptions for next step
-
-
-
-  // add a new subscriptions for the next step
-  getNextStep(stepObj)
-
-}
-
-function getNextStep(missionObj, currentStep) {
-
-}
-
-//User's current step
-
-function userCurrentStep(mission, currentUser) {
   var query = new Parse.Query(Subscriptions);
+  var currentUser = user || Parse.User.current();
+  //console.log(currentUser);
 
-  var currentUser = currentUser || Parse.User.current();
+  var mission = new Mission({
+    objectId: missionId
+  });
 
   return query
     .equalTo('user', currentUser)
+    .equalTo('completed', false)
     .equalTo('mission', mission)
-    .include('step')
-    .find()
-    .then(function(subscriptions) {
-      return subscriptions[0].get('step');
-    });
+    .first()
+    .then(function(userSubscription) {
+      //return userSubscription;       //returns subscription object
+      userSubscription.set('completed', true);
+      userSubscription.save();
+
+      getNextStep(userSubscription);
+
+      var subscription = new Subscriptions();
+
+      subscription.set("Mission", mission);
+      subscription.set("User", user);
+      subscription.set("Step", currentStep(mission));
+
+      subscription.save();
+    })
+
+});
 }
 
 
-function stepsProgress(key) { //do we need key???
-  var query = new Parse.Query(Subscriptions);
-  var currentUser = currentUser || Parse.User.current();
-
-  query
-    .equalTo('user', currentUser)
-    .include('step') //?? do we include step here??
-    .find()
-    .then(function(currentStep) {
-      return currentStep.get("currentStep");
-    }).then(function(step) {
-      if (key) {
-        return step + 1; // return the NEXT step
-      }
-      else {
-        return step; // return the CURRENT step
-      }
-    });
-}
+// set complete? to true on the subscriptions
 
 
-function getMission(id) {
+
+//check off current step
+//add line in Subscriptions for next step
+
+
+
+// add a new subscriptions for the next step
+//   getNextStep(stepObj)
+
+// }
+
+function getNextStep(missionObj, currentStep) {
+
+  var user = Parse.User.current();
   var query = new Parse.Query(Mission);
-  return query.get(id);
-}
+  var currentStep =
 
-
-function getCurrentUser() {
-  return Parse.User.current();
-}
-
-//listStepsOfMission("bxreD6KsvJ");
+    query.get(missionObj).then(function(mission) {
+        var subscription = new Subscriptions();
 
 
 
+      }
 
-//a step
+      //User's current step
+
+      function userCurrentStep(currentUser, missionId) {
+
+        var query = new Parse.Query(Subscriptions);
+        var currentUser = currentUser || Parse.User.current();
+
+        return query
+          .equalTo('user', currentUser)
+          .equalTo('mission', missionId)
+
+        .include('step')
+          .find()
+          .then(function(subscriptions) {
+            return subscriptions.get('step');
+          });
+      }
+
+
+      function stepsProgress(key) { //do we need key???
+        var query = new Parse.Query(Subscriptions);
+        var currentUser = currentUser || Parse.User.current();
+
+        query
+          .equalTo('user', currentUser)
+          .include('step') //?? do we include step here??
+          .find()
+          .then(function(currentStep) {
+            return currentStep.get("currentStep");
+          }).then(function(step) {
+            if (key) {
+              return step + 1; // return the NEXT step
+            }
+            else {
+              return step; // return the CURRENT step
+            }
+          });
+      }
+
+
+      function getMission(id) {
+        var query = new Parse.Query(Mission);
+        return query.get(id);
+      }
+
+
+      function getCurrentUser() {
+        return Parse.User.current();
+      }
+
+      //listStepsOfMission("bxreD6KsvJ");
+
+
+
+
+      //a step
 
 
 
 
 
-//Complete a step //enter KEY
+      //Complete a step //enter KEY
