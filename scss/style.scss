@@ -10,10 +10,12 @@ html {
 @import 'github-user';
 @import 'transitions';
 
+///////////////////
 //UNIVERSAL CSS -----------------------------------
+//////////////////
 
 #app {
-    position: fixed;
+    //position: fixed;
     top: 0;
     left: 0;
     width: 100vw;

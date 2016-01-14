@@ -18,7 +18,6 @@ var AdventuresList = React.createClass({
             console.log(result);
             currentComp.setState({adventures:result}) 
         
-        
         })
         
     },
