@@ -1,0 +1,56 @@
+
+    // for (var i in results) {
+    //     var title = results[i].get("title");
+    //     var description = results[i].get("description");
+    //     var missionSteps = results[i].get("missionSteps");
+    //   }
+
+
+// Create A Mission
+
+// var Mission = Parse.Object.extend('Mission');
+// var MissionStep = Parse.Object.extend('Step');
+
+// var mission = new Mission();
+// mission.set({
+//   title: 'Dessert Crawl',
+//   description: 'Eat all the desserts',
+//   //location: {}
+// });
+
+// var missionStep = new MissionStep();
+// missionStep.set({
+//   title: 'Go to Christian Faure',
+//   //location: {lat: 45, lng: -74},
+// });
+
+// var steps = mission.get('missionSteps') || [];
+
+// steps.push(missionStep);
+
+// mission.set('missionSteps', steps);
+// missionStep.save();
+
+// mission.save()
+
+
+
+
+// var mission = new Parse.Query(Mission);
+
+
+// mission.get("mission-id")
+//   .then(function(mission) {
+//     // The object was retrieved successfully.
+//   })
+//   .then(function(hello) {
+//     // Everything is done!
+//   }, function(object, error) {
+//     // The object was not retrieved successfully.
+//     // error is a Parse.Error with an error code and message.
+//   });
+
+
+
+
+

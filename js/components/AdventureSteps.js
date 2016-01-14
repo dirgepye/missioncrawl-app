@@ -16,11 +16,24 @@ var AdventureSteps = React.createClass({
     },
     componentDidMount : function () {
         var currentComp = this;
-        
-        api.listStepsOfMission(this.props.adventureId).then(function(result){
-            currentComp.setState({steps:result})
-            console.log(result)
-        })
+
+        console.log(this.props.context);
+
+        if (this.props.context === 'unsubscribed') {
+            api.getFirstStep(this.props.adventure).then(function(step){
+                var result = [];
+                result.push(step);
+                currentComp.setState({steps: result})
+            });
+        }
+        else {
+            api.listStepsOfMission(this.props.adventure.id).then(function(result){
+                currentComp.setState({steps:result})
+                //console.log(result)
+            })
+        }
+
+
         
     },
     render() {

@@ -31,7 +31,9 @@ module.exports = {
   userLogIn: u.userLogIn,
   getFirstStep: getFirstStep,
   getMissionList: getMissionList,
-  getCurrentUser: getCurrentUser
+  getCurrentUser: getCurrentUser,
+  completeStep: completeStep,
+  userCurrentStep: userCurrentStep
 };
 
 
@@ -86,35 +88,38 @@ function assignStepsToMission(title, description, GeoPoint, missionObj) {
 
   return newStep.save().then(function(savedStep) {
 
-    return query.get(missionObj).then(function(mission) {
+    return query
+      .get(missionObj)
+      .then(function(mission) {
 
-      var stepRelation = mission.get("steps");
+        var stepRelation = mission.get("steps");
 
-      stepRelation.add(savedStep);
+        stepRelation.add(savedStep);
 
-      return mission.save();
+        return mission.save();
 
-    });
+      });
   });
 }
 
 
 
 //Subscribe to a Mission
-function subscribeToMission(missionId) { // formerly named assignUserToMission
+function subscribeToMission(missionId,currentUser) { // formerly named assignUserToMission
 
-  var user = Parse.User.current(); //user can assign other users to missions so not necessarily current user
-
+  var currentUser = currentUser || Parse.User.current();
   var query = new Parse.Query("Mission");
 
-  query.get(missionId).then(function(mission) {
+  return query.get(missionId).then(function(mission) {
 
-    var subscription = new Subscriptions();
-    subscription.set("Mission", mission);
-    subscription.set("User", user);
-    subscription.set("Step", getFirstStep(mission));
+    var subscription = new Subscriptions({"completed":false});
+    subscription.set("mission", mission);
+    subscription.set("user", currentUser);
 
-    subscription.save();
+    return getFirstStep(mission).then(function(firstStep){
+      subscription.set("step", firstStep);
+      return subscription.save();
+    });
 
   });
 }
@@ -128,58 +133,105 @@ function getMissionList() {
 
 }
 
+
 // Get First Step of a Mission
-
-function getFirstStep(missionId) {
-
-  var query = new Parse.Query(Mission);
-
-  return query
-    .get(missionId)
-    .then(function(currentMission) {
-
-      return currentMission.relation("steps").query().equalTo("stepOrder", 1).find();
-    })
+function getFirstStep(mission) {
+    return mission.relation("steps").query().ascending("stepOrder").find()
     .then(function(arrayOfSteps) {
-      return arrayOfSteps;
-
+        return arrayOfSteps[0];
     });
 }
 
+function completeStep(missionId, user) {
 
-function completeStep(stepObj, missionObj, user) {
+  var query = new Parse.Query(Subscriptions);
+  var currentUser = user || Parse.User.current();
+  //console.log(currentUser);
 
-  // set complete? to true on the subscriptions
+  var missionQuery = new Parse.Query(Mission);
 
+  return missionQuery
+    .get(missionId)
+    .then(function(mission){
+      
+      return query
+      .equalTo('user', currentUser)
+      .equalTo('completed', false)
+      .equalTo('mission', mission)
+      .include('step')
+      .first()
+      .then(function(userSubscription) {
+        
+        userSubscription.set('completed', true); //change 'completed' to true
+  
+        userSubscription.save(); //save change
+        
+        var completedStep = userSubscription.get("step");
+        
+        return getNextStep(mission,completedStep);
 
-  //check off current step
-  //add line in Subscriptions for next step
+      })
+      .then(function(nextStep){
+        if (nextStep) {
+          console.log(nextStep);
+          var subscription = new Subscriptions();
+          subscription.set("mission", mission);
+          subscription.set("user", user);
+          subscription.set("step", nextStep);
+      
+          return subscription.save();
+          
+        }
+        else {
+          return "completed";
+        }
+      })
+    })
 
+  
+    
 
-
-  // add a new subscriptions for the next step
-  getNextStep(stepObj)
+  // getNextStep(userSubscription);
 
 }
 
-function getNextStep(missionObj, currentStep) {
 
+// set complete? to true on the subscriptions
+
+
+
+//check off current step
+//add line in Subscriptions for next step
+
+
+
+// add a new subscriptions for the next step
+//   getNextStep(stepObj)
+
+// }
+
+function getNextStep(missionObj, currentStep) {
+  
+  var nextStepOrder = currentStep.get("stepOrder") + 1;
+  
+  return missionObj.relation("steps").query().equalTo("stepOrder",nextStepOrder).first();
 }
 
 //User's current step
 
-function userCurrentStep(mission, currentUser) {
-  var query = new Parse.Query(Subscriptions);
+function userCurrentStep(currentUser, missionId) {
 
+  var query = new Parse.Query(Subscriptions);
   var currentUser = currentUser || Parse.User.current();
 
   return query
     .equalTo('user', currentUser)
-    .equalTo('mission', mission)
-    .include('step')
+    .equalTo('mission', missionId)
+
+  .include('step')
     .find()
     .then(function(subscriptions) {
-      return subscriptions[0].get('step');
+      return subscriptions.get('step');
     });
 }
 

@@ -2,19 +2,9 @@ import React from 'react';
 import AdventureSteps from './AdventureSteps';
 import api from '../parse/api';
 
-
 var Adventure = React.createClass({
-    getInitialState(){
-        return {
-            steps: []
-        }
-    },
-    componentDidMount() {
-        var currentComp = this;
-        
-        api.listStepsOfMission(this.props.details.id).then(function(result) {
-            currentComp.setState({steps: result})
-        })
+    subscribeTo() {
+        api.subscribeToMission(this.props.details.id);
     },
     render() {
         var title = this.props.details.get('title');
@@ -38,12 +28,11 @@ var Adventure = React.createClass({
                         
         
                     </div>
-                    <AdventureSteps adventureId={this.props.details.id}/>
-                    
+                    <AdventureSteps adventure={this.props.details} context={this.props.context}/>
+
                     <div className="adventure__button">
-                        <button>More Info</button>
-                        <button>Start!</button>
-                    </div>  
+                        <button onClick={this.subscribeTo}>Start the adventure!</button>
+                    </div>
                 </div>
             </div>
         );

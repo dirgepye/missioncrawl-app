@@ -58,9 +58,9 @@ query.get("ifYjtzkhKS")
     // });
     
     
-    api.assignStepsToMission("La Commune2","Visit the geniuses at DecodeMTL!",{latitude:45.5077, longitude:-73.555594},'drDo8bvZLy').then(function(result){
+    // api.assignStepsToMission("La Commune2","Visit the geniuses at DecodeMTL!",{latitude:45.5077, longitude:-73.555594},'drDo8bvZLy').then(function(result){
         
-    });
+    // });
     
     // api.getMission("KAE1EVMdaM").then(function(mission){
 
@@ -73,6 +73,11 @@ query.get("ifYjtzkhKS")
     // .then(function(result){
     //     console.log(result);
     // })
+    
+    api.completeStep("drDo8bvZLy", user)
+    .then(function(result){
+        console.log(result);
+    })
     
 })
 
