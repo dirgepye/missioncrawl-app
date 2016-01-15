@@ -49,7 +49,7 @@ var Login = React.createClass({
             <span className="error">{this.state.error}</span>
             <input type="text" ref="loginUserName" placeholder="user name" id="login-name" className="form form--login"/>
             <br />
-            <input type="text" ref="loginPass" placeholder="password" id="login-password" className="form form--login"/>
+            <input type="password" ref="loginPass" placeholder="password" id="login-password" className="form form--login"/>
             <br />
             <input type="Submit" className="form form--submit" />
             <p>Don't have an account? <Link to='/signup'>Sign up now!</Link></p>
