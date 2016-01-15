@@ -62,7 +62,7 @@ query.get("ifYjtzkhKS")
         
     // });
     
-    // api.getMission("KAE1EVMdaM").then(function(mission){
+    // api.getMission("drDo8bvZLy").then(function(missionm,user){
 
     //     api.userCurrentStep(mission,user).then(function(step){
     //         console.log(step.get("title"));
@@ -74,9 +74,12 @@ query.get("ifYjtzkhKS")
     //     console.log(result);
     // })
     
-    api.completeStep("drDo8bvZLy", user)
-    .then(function(result){
-        console.log(result);
+    //api.completeStep("drDo8bvZLy", user)
+    //.then(function(result){
+    //    console.log(result);
+    //})
+    api.userCurrentStep('drDo8bvZLy',user).then(function(step){
+        console.log(step);
     })
     
 })

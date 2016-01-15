@@ -26,10 +26,22 @@ var AdventureSteps = React.createClass({
                 currentComp.setState({steps: result})
             });
         }
-        else {
+        else if (this.props.context === 'completed'){
             api.listStepsOfMission(this.props.adventure.id).then(function(result){
                 currentComp.setState({steps:result})
                 //console.log(result)
+            })
+        }
+        else {
+            api.getStepProgress(this.props.adventure).then(function(result){
+                var steps = result.map(function(sub){
+                    var step = sub.get('step');
+                    step.completed=sub.get('completed');
+                    console.log(step);
+                    return step;
+                })
+
+                currentComp.setState({steps:steps});
             })
         }
 
@@ -43,7 +55,7 @@ var AdventureSteps = React.createClass({
                 
                     <ol>
                         {this.state.steps.map(function(stepParseObject, index) {
-                            return <Step key={stepParseObject.id} index={index} details={stepParseObject} />
+                            return <Step key={stepParseObject.id} index={index} details={stepParseObject}/>
                         })}
                     </ol>
                 </div>
