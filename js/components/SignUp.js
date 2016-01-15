@@ -52,7 +52,7 @@ var SignUp = React.createClass({
             {this.state.error}
             <input type="text" ref="signUpUserName" placeholder="user name" id="signup-name" className="form form--login"/>
             <br />
-            <input type="text" ref="signUpPassword" placeholder="password" id="signup-password" className="form form--login"/>
+            <input type="password" ref="signUpPassword" placeholder="password" id="signup-password" className="form form--login"/>
             <br />
             <input type="text" ref="signUpEmail" placeholder="email" id="signup-email" className="form form--login"/>
             <br />

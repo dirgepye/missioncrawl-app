@@ -23,7 +23,7 @@ var FindAdventure = React.createClass({
                 <div className="results" >
                     <Adventures />
                 </div>    
-                <button>Search</button>
+                
             </div>
         );    
     }
