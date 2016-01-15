@@ -35,7 +35,7 @@ var InProgressAdventure = React.createClass ({
     },
     renderSteps : function(ParesSteps, index){
         
-        return (<li>{this.title}l</li>)
+        return (<li></li>)
         
     },
     render() {

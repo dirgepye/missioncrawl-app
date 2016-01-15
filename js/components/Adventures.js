@@ -28,7 +28,7 @@ var AdventuresList = React.createClass({
     render() {
         return (
         
-            <ul>
+            <ul className="rendered">
                 {this.state.adventures.map(this.renderAdventure)}
             </ul>
         );

@@ -8,20 +8,19 @@ var FindAdventure = React.createClass({
         return (
             <div>
                 <div className="adventure">
-                Title
+                <h2>Title</h2>
                 <input className="form" type="text" placeholder="search now!" />
-                Category
-                <br />
+                <h2>Category</h2>
                 <select className="adventure-categories">
                     <option value="Food">Food</option>
                     <option value="Drink">Drink</option>
                     <option value="Art">Art</option>
                     <option value="Culture">Cultures</option>
-                </select>
+                </select><br />
                 <a href="#" className="adventure-categories__add">Add category</a>
                 </div>
                 
-                <div className="adventure results" >
+                <div className="results" >
                     <Adventures />
                 </div>    
                 <button>Search</button>

@@ -13,26 +13,20 @@ var Adventure = React.createClass({
         //var categories = this.props.details.categories;
         
         return (
-            <div className="adventure">
-                <div className="adventure__details">
-                    <div className="adventure-display">
-                        <h2 className="adventure__title">{title},</h2>
-                        <p className="adventure__description">{description}</p>
-                        <div className="adventure-category">
-                            <ul>
-                                <li><a href="#">category</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="adventure-display">
-                        
-        
-                    </div>
-                    <AdventureSteps adventure={this.props.details} context={this.props.context}/>
+            <div className="rendered2">
+                <div className="adventure-display">
+                    <h2 className="adventure__title">{title},</h2>
+                    <p className="adventure__description">{description}</p>
+                    <div className="adventure-category">
+                        <ul>
+                            <li><a href="#">category</a></li>
+                        </ul>
+                    </div>    
+                </div>
+                <AdventureSteps adventure={this.props.details} context={this.props.context}/>
 
-                    <div className="adventure__button">
-                        <button onClick={this.subscribeTo}>Start the adventure!</button>
-                    </div>
+                <div className="adventure__button">
+                    <button onClick={this.subscribeTo}>Start the adventure!</button>
                 </div>
             </div>
         );
