@@ -24,8 +24,7 @@ var CurrentAdventures = React.createClass({
         });
     },
     renderAdventure : function(adventureParseObject, index) {
-        return <Adventure key={adventureParseObject.id} index={index} details={adventureParseObject} />
-            
+        return <Adventure key={adventureParseObject.id} index={index} details={adventureParseObject} context="current"/>
     },
     render: function() {
         return (

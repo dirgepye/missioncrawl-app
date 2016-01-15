@@ -2,9 +2,30 @@ import React from 'react';
 import AdventureSteps from './AdventureSteps';
 import api from '../parse/api';
 
+import {Link,History} from 'react-router';
+
 var Adventure = React.createClass({
+    mixins : [History],
+    getInitialState(){
+        return {
+            text:'Start the adventure!'
+        }
+    },
+    componentDidMount(){
+        if (this.props.context ==='current') {
+            this.setState({text:"Continue"});
+        }
+        else if (this.props.context ==='completed'){
+            this.setState({text:"Completed"});
+        }
+    },
     subscribeTo() {
-        api.subscribeToMission(this.props.details.id);
+        if (this.props.context ==='current') {
+            this.history.pushState(null, '/currentadventures/'+this.props.details.id);
+        }
+        else {
+            api.subscribeToMission(this.props.details.id);
+        }
     },
     render() {
         var title = this.props.details.get('title');
@@ -31,7 +52,7 @@ var Adventure = React.createClass({
                     <AdventureSteps adventure={this.props.details} context={this.props.context}/>
 
                     <div className="adventure__button">
-                        <button onClick={this.subscribeTo}>Start the adventure!</button>
+                        <button onClick={this.subscribeTo}>{this.state.text}</button>
                     </div>
                 </div>
             </div>

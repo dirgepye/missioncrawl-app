@@ -33,7 +33,7 @@ module.exports = {
   getMissionList: getMissionList,
   getCurrentUser: getCurrentUser,
   completeStep: completeStep,
-  userCurrentStep: userCurrentStep
+  getStepProgress:getStepProgress
 };
 
 
@@ -133,6 +133,19 @@ function getMissionList() {
 
 }
 
+//Current Steps
+function getStepProgress(mission) {
+
+  var query = new Parse.Query(Subscriptions);
+  var currentUser = Parse.User.current();
+
+  return query
+      .equalTo('user',currentUser)
+      .equalTo('mission', mission)
+      .include('step')
+      .find()
+}
+
 
 // Get First Step of a Mission
 function getFirstStep(mission) {
@@ -146,7 +159,7 @@ function completeStep(missionId, user) {
 
   var query = new Parse.Query(Subscriptions);
   var currentUser = user || Parse.User.current();
-  //console.log(currentUser);
+  console.log(currentUser);
 
   var missionQuery = new Parse.Query(Mission);
 
@@ -173,10 +186,10 @@ function completeStep(missionId, user) {
       })
       .then(function(nextStep){
         if (nextStep) {
-          console.log(nextStep);
-          var subscription = new Subscriptions();
+          console.log(user);
+          var subscription = new Subscriptions({completed:false});
           subscription.set("mission", mission);
-          subscription.set("user", user);
+          subscription.set("user", currentUser);
           subscription.set("step", nextStep);
       
           return subscription.save();
@@ -213,26 +226,32 @@ function completeStep(missionId, user) {
 function getNextStep(missionObj, currentStep) {
   
   var nextStepOrder = currentStep.get("stepOrder") + 1;
-  
+  console.log(nextStepOrder);
   return missionObj.relation("steps").query().equalTo("stepOrder",nextStepOrder).first();
 }
 
 //User's current step
 
-function userCurrentStep(currentUser, missionId) {
+function userCurrentStep(missionId, currentUser) {
 
   var query = new Parse.Query(Subscriptions);
   var currentUser = currentUser || Parse.User.current();
 
-  return query
-    .equalTo('user', currentUser)
-    .equalTo('mission', missionId)
+  var missionQuery = new Parse.Query(Mission);
 
-  .include('step')
-    .find()
-    .then(function(subscriptions) {
-      return subscriptions.get('step');
-    });
+  return missionQuery
+      .get(missionId)
+      .then(function(mission){
+        return query
+            .equalTo('user', currentUser)
+            .equalTo('mission', mission)
+            .equalTo('completed', false)
+            .include('step')
+            .first()
+            .then(function(subscriptions) {
+              return subscriptions.get('step');
+            });
+      })
 }
 
 
