@@ -123,6 +123,17 @@ button {
     
 }
 
+.adventure {
+    margin: 10px;
+    //margin-bottom: 20px;
+    border-radius: 2px;
+    padding: 10px;
+    color: #646C75;
+    background-color: #DED9DC;
+    font-size: 14px;
+}
+
+
 
     
     
@@ -144,15 +155,6 @@ button {
     background-color: #16718C;
 }
 
-.adventure {
-    margin: 10px;
-    //margin-bottom: 20px;
-    border-radius: 2px;
-    padding: 10px;
-    color: #646C75;
-    background-color: #DED9DC;
-    font-size: 14px;
-}
 
 .adventure--login {
     width: 400px;
@@ -184,7 +186,8 @@ button {
     padding: 10px;
     margin-bottom: 10px;
     border-bottom: solid 1px $med-gray;
-    
+        
+        
     //margin: 0px 5px;
     
 }
@@ -198,11 +201,14 @@ button {
 .adventure__title {
     margin-bottom: 5px;
     border-bottom: solid 1px #DED9DC;
-        
-        span {
-            font-style: italic;
-            font-size: 18px;
+    
+    .location {
+            color: blue;
         }
+    
+    
+        
+        
 }
 
 
@@ -379,10 +385,38 @@ button {
 }
 
 
+///////////////////////////
+// IN PROGRESS ADVENTURE///
+///////////////////////////
 
+.completed {
+    
+    p {
+        font-size: 25px;
+        font-weight: 900;
+    }
+    
+    a {
+        font-size: 1.2em;
+        font-weight: 900;
+    }
+}
 
+.in-progress {
+    
+    
+}
 
+.in-progress--title {
+    font-size: 18px;    
+    
+    width: 100%;
 
+}
+
+.in-progress--desc {
+    width: 100%;
+}
 
 
 

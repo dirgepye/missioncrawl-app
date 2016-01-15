@@ -41,10 +41,10 @@ var StepDetails = React.createClass({
         //var description = 'dsg';
 
         return (
-            <div className="stepdetails">
-                <ul>
-                    <li><p>{title}</p></li>
-                    <li><p>{description}</p></li>
+            <div className="adventure stepdetails">
+                <ul className="in-progress">
+                    <li className="adventure-display in-progress--title"><p>{title}</p></li>
+                    <li className="adventure-display in-progress--desc"><p>{description}</p></li>
                 </ul>
                 <button onClick={this.completeStep}>Next Step</button>
             </div>

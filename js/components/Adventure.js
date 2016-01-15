@@ -34,17 +34,19 @@ var Adventure = React.createClass({
     render() {
         var title = this.props.details.get('title');
         var description = this.props.details.get('description');
-        var location = this.props.details.get('Location');
+        var location = this.props.details.get('location');
+        var category = this.props.details.get('category');
+    
         //var categories = this.props.details.categories;
         
         return (
             <div className="rendered2">
                 <div className="adventure-display">
-                    <h2 className="adventure__title">{title},</h2>
+                    <h2 className="adventure__title">{title},<span className="location"> {location}</span></h2>
                     <p className="adventure__description">{description}</p>
                     <div className="adventure-category">
                         <ul>
-                            <li><a href="#">category</a></li>
+                            <li>Category: <a href="#">{category}</a></li>
                         </ul>
                     </div>    
                 </div>

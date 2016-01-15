@@ -5,8 +5,8 @@ import {Link,History} from 'react-router';
 var Completed = React.createClass({
     render() {
         return (
-            <div className="completed">
-                <p>Congrats! You have finished the adventure.</p>
+            <div className="adventure completed">
+                <p className="adventure-display">Congrats! You have finished the adventure.</p>
                 <Link to="/findadventure">Find new adventures</Link>
             </div>
         )
