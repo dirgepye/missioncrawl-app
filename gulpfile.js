@@ -42,7 +42,7 @@ gulp.task('browser-sync', function() {
     browserSync({
         // we need to disable clicks and forms for when we test multiple rooms
         server : {},
-        port: process.env.PORT, // this line adds local port 8080
+        port: process.env.PORT || 3000, // this line adds local port 8080
         middleware : [ historyApiFallback() ],
         ghostMode: false
     });
