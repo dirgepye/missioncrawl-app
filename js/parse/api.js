@@ -33,7 +33,9 @@ module.exports = {
   getMissionList: getMissionList,
   getCurrentUser: getCurrentUser,
   completeStep: completeStep,
-  getStepProgress:getStepProgress
+  getStepProgress:getStepProgress,
+  getCompletedMissions:getCompletedMissions,
+  getNextStep:getNextStep
 };
 
 
@@ -56,6 +58,21 @@ function getUserMissions(currentUser) { // formerly named findAllMissions
     });
 }
 
+
+function getCompletedMissions(currentUser) { // formerly named findAllMissions
+
+  var currentUser = currentUser || Parse.User.current();
+  var query = new Parse.Query(Subscriptions);
+
+  return query
+      .equalTo('user', currentUser)
+      .include("mission")
+      .include('step')
+      .find()
+      .then(function(userSubscriptions) {
+        return userSubscriptions;
+      });
+}
 
 //Steps list of a mission
 function listStepsOfMission(missionId) {
