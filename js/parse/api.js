@@ -186,14 +186,13 @@ function completeStep(missionId, user) {
       })
       .then(function(nextStep){
         if (nextStep) {
-          console.log(user);
           var subscription = new Subscriptions({completed:false});
           subscription.set("mission", mission);
           subscription.set("user", currentUser);
           subscription.set("step", nextStep);
       
-          return subscription.save();
-          
+          subscription.save();
+          return nextStep;
         }
         else {
           return "completed";

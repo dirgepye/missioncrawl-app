@@ -20,11 +20,15 @@ var Adventure = React.createClass({
         }
     },
     subscribeTo() {
+        var currentComp = this;
+
         if (this.props.context ==='current') {
             this.history.pushState(null, '/currentadventures/'+this.props.details.id);
         }
         else {
-            api.subscribeToMission(this.props.details.id);
+            api.subscribeToMission(this.props.details.id).then(function(res){
+                currentComp.history.pushState(null, '/currentadventures/'+currentComp.props.details.id);
+            });
         }
     },
     render() {

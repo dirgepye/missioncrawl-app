@@ -28,8 +28,9 @@ var StepDetails = React.createClass({
                 currentComp.history.pushState(null, '/completed');
             }
             else {
-                console.log(result);
-                window.location.reload();
+                currentComp.setState({step:result});
+
+                currentComp.history.pushState(null, '/currentadventures/'+currentComp.props.params.missionId);
             }
         });
     },
